@@ -21,6 +21,9 @@
   <link rel="import"
     href="../components/tk-vslider/tk-vslider.html">
 
+  <link rel="import"
+    href="rab-fast-scroll.html">
+
   <link rel="import" href="post-list.html">
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -42,6 +45,7 @@
   html,body {
     height: 100%;
     margin: 0;
+    padding-top: 10px;
     background-color: #E5E5E5;
     font-family: 'RobotoDraft', sans-serif;
   }
@@ -92,20 +96,18 @@
 
 <body unresolved>
 
-  <div class="slider slider-left">
-    <tk-vslider min="10" max="200" value="100" pin="true" rotate="true"></tk-vslider>
-  </div>
+    <rab-fast-scroll></rab-fast-scroll>
 
+    <div id="container">
+     <my-app></my-app>
+    </div>
 
-  <div class="slider slider-right">
-    <tk-vslider min="10" max="200" value="100" pin="true" rotate="true"></tk-vslider>
-  </div>
-
-  <div class="container" horizontal center-justified layout>
-
-      <post-list show="all"></post-list>
-
-  </div>
+    <script>  
+      var container = document.querySelector('#container');
+      container.addEventListener('said-hello', function(e) {
+        alert('outside: Said hi to ' + e.detail.name + ' from ' + e.target.localName);
+      });
+    </script>
 
 </body>
 

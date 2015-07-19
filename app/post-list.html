@@ -19,13 +19,14 @@
     <div layout vertical center>
       <template repeat="{{post in posts}}">
         <post-card
-          favorite="{{post.favorite}}"
+          favorite="{{post.name}}"
           on-favorite-tap="{{handleFavorite}}"
-          hidden?="{{show == 'favorites' && !post.favorite}}">
-          <img src="{{post.avatar}}" width="70" height="70">
-          <h2>{{post.username}}</h2>
-          <p>{{post.text}}</p>
+          hidden?="{{show == 'favorites' && !post.name}}">
+          <h2>{{post.name}}</h2>
         </post-card>
+        <template repeat="{{combination in post.combinations}}">
+          <h2>{{combination.name}}</h2>
+        </template>
       </template>
     </div>
   </template>

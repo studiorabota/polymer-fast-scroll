@@ -1,0 +1,82 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+<polymer-element name="rab-fast-scroll">
+  <template>
+
+    <style>
+    :host {
+
+    }
+
+    .scroll-window {
+      height: 100vh;
+      overflow: scroll;
+            display: block;
+      width: 80%;
+      margin: 0 auto;
+    }
+    </style>
+
+    <tk-vslider min="10" max="200" value="100" pin="true" on-immediate-value-change="{{second}}"></tk-vslider>
+
+    <tk-vslider min="10" max="200" value="100" pin="true" on-immediate-value-change="{{second}}"></tk-vslider>
+
+    <div id="scrollWindow" class="scroll-window">
+      <post-list show="all"></post-list>
+    </div>
+
+  </template>
+
+  <script>
+    Polymer('rab-fast-scroll', {
+      ready: function() {
+        // Initialize the instance's "list" property to empty array.
+        // this.immediateValue = this.immediateValue || [];
+        console.log(this.immediateValue);
+      },
+      second: function(e, detail, sender) {
+        console.log(sender.immediateValue);
+        this.$.scrollWindow.scrollTop = sender.immediateValue;
+      }
+    });
+  </script>
+</polymer-element>
+
+<polymer-element name="say-hello" attributes="name" on-click="{{sayHi}}">
+  <template>Hello {{name}}!</template>
+  <script>
+    Polymer('say-hello', {
+      sayHi: function() {
+        this.fire('said-hello', {name: this.name});
+      }
+    });
+  </script>
+</polymer-element>
+
+<polymer-element name="my-app" on-said-hello="{{third}}">
+  <template>
+    <div on-said-hello="{{second}}">
+      <say-hello name="Eric" on-said-hello="{{first}}"></say-hello>
+    </div>
+  </template>
+  <script>
+    (function() {
+      function logger(prefix, detail, sender) {
+        alert(prefix + ' Said hi to ' + detail.name +
+              ' from ' + sender.localName);
+      }
+
+      Polymer('my-app', {
+        first: function(e, detail, sender) {
+          logger('first():', detail, sender);
+        },
+        second: function(e, detail, sender) {
+          logger('second():', detail, sender);
+        },
+        third: function(e, detail, sender) {
+          logger('third():', detail, sender);
+        }
+      });
+    })();
+  </script>
+</polymer-element>
