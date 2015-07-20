@@ -9,10 +9,10 @@
     }
 
     #scrollWindow {
-      height: 80vh;
+      height: 100vh;
       overflow-y: scroll;
       display: block;
-      width: 80%;
+      width: 100%;
       margin: 0 auto;
     }
 
@@ -20,11 +20,23 @@
       min-height: 200px;
     }
 
+    #sliderLeft {
+      position: fixed;
+      left: 0px;
+      z-index: 999;
+    }
+
+    #sliderRight {
+      position: fixed;
+      right: 0px;
+      z-index: 999;
+    }
+
     </style>
 
-    <tk-vslider min="0" max="{{maxScroll}}" value="0" pin="true" on-immediate-value-change="{{scroll}}"></tk-vslider>
+    <tk-vslider min="0" max="{{maxScroll}}" value="0" pin="true" on-immediate-value-change="{{scroll}}" rotate="true" id="sliderLeft"></tk-vslider>
 
-    <tk-vslider min="0" max="{{maxScroll}}" value="0" pin="true" on-immediate-value-change="{{scroll}}"></tk-vslider>
+    <tk-vslider min="0" max="{{maxScroll}}" value="0" pin="true" on-immediate-value-change="{{scroll}}" rotate="true" id="sliderRight"></tk-vslider>
 
     <div id="scrollWindow">
         <rab-list show="all" on-rab-list-ready="{{listReady}}"></rab-list>

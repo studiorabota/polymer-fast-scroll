@@ -9,16 +9,12 @@
       width: 100%;
     }
     post-card {
-      margin-bottom: 30px;
     }
     </style>
     
     <div layout vertical center>
       <template repeat="{{post in posts}}">
-        <post-card
-          favorite="{{post.name}}"
-          on-favorite-tap="{{handleFavorite}}"
-          hidden?="{{show == 'favorites' && !post.name}}">
+        <post-card>
           <h2>{{post.name}}</h2>
         </post-card>
         <template repeat="{{combination in post.combinations}}">

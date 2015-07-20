@@ -10,18 +10,22 @@
       background-color: white;
       padding-top: 20px;
       padding-bottom: 20px;
-      width: 100%;
       font-size: 1.2rem;
       font-weight: 300;
+      width: 80%;
+      text-align: center;
     }
     .card-header {
-      margin-bottom: 10px;
+      text-align: center;
     }
     polyfill-next-selector { content: '.card-header h2'; }
     .card-header ::content h2 {
       margin: 0;
       font-size: 1.8rem;
       font-weight: 300;
+      text-align: center;
+      display: block;
+      width: 100%;
     }
     polyfill-next-selector { content: '.card-header img'; }
     .card-header ::content img {
@@ -47,12 +51,6 @@
 
     </div>
 
-    <core-icon-button
-      id="favicon"
-      icon="favorite"
-      on-tap="{{favoriteTapped}}">
-    </core-icon-button>
-
     <content></content>   
   </template>
   <script>
@@ -62,10 +60,6 @@
         value: false,
         reflect: true
       }
-    },
-    favoriteTapped: function(event, detail, sender) {
-      this.favorite = !this.favorite;
-      this.fire('favorite-tap');
     }
   });
   </script>
