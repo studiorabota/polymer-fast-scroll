@@ -30,7 +30,25 @@
       this.posts = PinYin;
     },
     domReady: function() {
-        this.fire('rab-list-ready');
+        
+        // get all sections
+        var elems = this.shadowRoot.querySelectorAll('post-card');
+
+        var sections =  {};
+
+        // save offset from top
+        for (var i = 0; i < elems.length; ++i) {
+          
+          // retrieve first letter TODO without using [0]
+          var letter = elems[i].innerText[0];
+          
+          // creat object
+          sections[letter] = { position: elems[i].offsetTop };
+        
+        }
+
+        this.fire('rab-list-ready', sections);
+
     }
   });
   </script>

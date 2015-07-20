@@ -20,23 +20,19 @@
       min-height: 200px;
     }
 
-    #sliderLeft {
-      position: fixed;
-      left: 0px;
-      z-index: 999;
-    }
-
-    #sliderRight {
-      position: fixed;
-      right: 0px;
-      z-index: 999;
-    }
-
     </style>
 
-    <tk-vslider min="0" max="{{maxScroll}}" value="0" pin="true" on-immediate-value-change="{{scroll}}" rotate="true" id="sliderLeft"></tk-vslider>
-
-    <tk-vslider min="0" max="{{maxScroll}}" value="0" pin="true" on-immediate-value-change="{{scroll}}" rotate="true" id="sliderRight"></tk-vslider>
+     <rab-vslider min="0" 
+    max="{{maxScroll}}" 
+    value="{{currentScroll}}" 
+    pin="true" 
+    on-immediate-value-change="{{scroll}}" 
+    on-change="{{change}}"
+    on-core-change="{{coreChange}}"
+    rotate="true" 
+    dragging="{{dragging}}"
+    sectionValue="{{sectionValue}}"
+    id="slider"></rab-vslider>
 
     <div id="scrollWindow">
         <rab-list show="all" on-rab-list-ready="{{listReady}}"></rab-list>
@@ -46,16 +42,61 @@
 
   <script>
     Polymer('rab-fast-scroll', {
+
       ready: function() {
 
+        // create reference to scroll window with overflow-y
+        this.scollWindow = this.$.scrollWindow;
+
       },
-      listReady: function() {
-        var scrollWindow = this.$.scrollWindow;
-        this.maxScroll = scrollWindow.scrollHeight - scrollWindow.offsetHeight; 
+      listReady: function(e, detail) {
+
+        // retrieve section scroll positions from list component
+        this.sections = detail;
+
+        // set max scroll for paper-slider
+        this.maxScroll = this.scollWindow.scrollHeight - this.scollWindow.offsetHeight; 
+
+        // track scroll by swiping or mouse
+        this.scollWindow.addEventListener("scroll", this.setScroll.bind(this), true);
+
+      },
+      setScroll: function(){
+
+        // update paper-sliders position
+        if(!this.dragging) this.currentScroll = this.scollWindow.scrollTop; 
+
+      },
+      change: function(){
+        // after scroll and release
+      },
+      coreChange: function(){
+        // after value is set programmatically on scroll
       },
       scroll: function(e, detail, sender) {
-        var scrollWindow = this.$.scrollWindow;
-        scrollWindow.scrollTop = sender.immediateValue;
+
+        var scrollWindow = this.$.scrollWindow,
+            scrollPosition = scrollWindow.scrollTop,
+            sections = this.sections;
+
+        // tell paper-slider which section is active
+        if(sections) {
+          for (var key in sections) {
+            
+            var sectionPosition = sections[key].position;
+
+            // check if section is in reach of top TODO: better comparison
+            if((sectionPosition + 80) / 2 > scrollPosition && 
+               (sectionPosition - 80) / 2 < scrollPosition) {
+                this.sectionValue = key;
+                break;
+            }
+          }
+        }
+      
+        // set window after scrolling paper-slider
+        if(this.dragging) scrollWindow.scrollTop = sender.immediateValue;
+
       }
     });
   </script>
