@@ -7,11 +7,11 @@
     "core-a11y-keys": "Polymer/core-a11y-keys#^0.5"
   },
   "version": "0.5.5",
-  "homepage": "https://github.com/arunhedcet/tk-vslider",
+  "homepage": "",
   "authors": [
-    "Arun <aruntknambiar@gmail.com>"
+    "Vincent Kranendonk <kranendonk.vincent@gmail.com>"
   ],
-  "description": "Polymer paper slider with rotate functionality",
+  "description": "Polymer fast scroll slider",
   "main": "rab-vslider.html",
   "keywords": [
     "polymer",
@@ -34,8 +34,8 @@
     "tag": "0.5.5",
     "commit": "7b8afa26c971aba7822c3ee4f79071b7b1dc7840"
   },
-  "_source": "https://github.com/arunhedcet/tk-vslider.git",
+  "_source": "https://github.com/...",
   "_target": "~0.5.5",
-  "_originalSource": "https://github.com/arunhedcet/tk-vslider.git",
+  "_originalSource": "https://github.com/...",
   "_direct": true
 }
