@@ -12,3 +12,4 @@ _site
 *.vulcanized.js
 *.sublime-*
 _data/versions
+.idea/
