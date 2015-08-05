@@ -98,11 +98,11 @@
                 if (!this.dragging) this.currentScroll = this.scrollWindow.scrollTop;
 
             },
-            scroll: function (e, detail, scrollbar) {
+            scroll: function (e, detail, scrollBar) {
 
                 var     dividers = this.dividers,
                         scrollWindow = this.$list(),
-                        scrollBarPosition = scrollbar._x,
+                        scrollBarPosition = scrollBar._x,
                         scrollDirection = scrollBarPosition > this.lastScrollTop ? "down" : "up";
 
                 this.lastScrollTop = scrollBarPosition;
