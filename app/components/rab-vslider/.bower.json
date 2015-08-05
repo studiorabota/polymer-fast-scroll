@@ -1,0 +1,41 @@
+{
+    "name": "rab-vslider",
+    "dependencies": {
+        "font-roboto": "Polymer/font-roboto#^0.5",
+        "paper-input": "Polymer/paper-input#^0.5",
+        "paper-progress": "Polymer/paper-progress#^0.5",
+        "core-a11y-keys": "Polymer/core-a11y-keys#^0.5"
+    },
+    "version": "0.5.5",
+    "homepage": "",
+    "authors": [
+        "Vincent Kranendonk <kranendonk.vincent@gmail.com>"
+    ],
+    "description": "Polymer fast scroll slider",
+    "main": "rab-vslider.html",
+    "keywords": [
+        "polymer",
+        "paper",
+        "slider",
+        "paper-slider",
+        "vertical"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "_release": "0.5.5",
+    "_resolution": {
+        "type": "version",
+        "tag": "0.5.5",
+        "commit": "7b8afa26c971aba7822c3ee4f79071b7b1dc7840"
+    },
+    "_source": "https://github.com/...",
+    "_target": "~0.5.5",
+    "_originalSource": "https://github.com/...",
+    "_direct": true
+}

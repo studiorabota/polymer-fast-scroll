@@ -1,0 +1,20 @@
+:host {
+
+}
+
+#scrollWindow {
+    height: 100vh;
+    overflow-y: scroll;
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+}
+
+#listPins {
+    min-height: 200px;
+}
+
+#content {
+    height: 400px;
+    overflow: auto;
+}

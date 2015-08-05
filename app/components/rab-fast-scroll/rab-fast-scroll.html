@@ -1,0 +1,137 @@
+<link rel="import" href="../../../components/polymer/polymer.html">
+<link rel="import" href="../../../components/core-list/core-list.html">
+
+<polymer-element name="rab-fast-scroll">
+    <template>
+
+        <style>
+            #scrollWindow {
+                height: 100%;
+                background: #6200EA;
+                overflow: auto;
+            }
+            .divider, .item  {
+                background:#6200EA;
+                text-align: center;
+                font-size: 30px;
+                padding-top: 30px;
+                padding-bottom: 30px;
+                color:#ffffff;
+            }
+            .item {
+                background: #651FFF;
+                border-top:1px solid #6200EA;
+            }
+        </style>
+
+        <rab-vslider min="0"
+                     max="{{maxScroll}}"
+                     value="{{currentScroll}}"
+                     pin="true"
+                     on-immediate-value-change="{{scroll}}"
+                     on-change="{{change}}"
+                     on-core-change="{{coreChange}}"
+                     rotate="true"
+                     dragging="{{dragging}}"
+                     sectionValue="{{sectionValue}}"
+                     id="slider"></rab-vslider>
+
+        <!--<rab-list show="all" on-rab-list-ready="{{listReady}}"></rab-list>-->
+
+        <!--<core-list data="{{data}}" groups="{{groups}}" scrollTarget="{{scrollTarget}}" flex>-->
+        <core-list data="{{data}}" groups="{{groups}}" id="scrollWindow" flex>
+            <template>
+                <div divider class="divider">{{groupModel.letter}}</div>
+                <div class="item">{{model.name}}</div>
+            </template>
+        </core-list>
+
+    </template>
+
+    <script>
+
+        Polymer('rab-fast-scroll', {
+
+            observe: {
+                '$.scrollWindow._viewportSize': 'listReady' // Viewport ready
+            },
+            data: [
+
+                [ { name: 'Adam' }, { name: 'Alex' } ],
+                [ { name: 'Bob' } ],
+                [ { name: 'Chuck' }, { name: 'Cathy' } ]
+
+            ],
+            groups: [
+
+                { letter: 'A' },
+                { letter: 'B' },
+                { letter: 'C' }
+
+            ],
+            $list: function() {
+
+                return this.shadowRoot.querySelector('core-list');
+
+            },
+            ready: function () {
+
+                // create reference to scroll window with overflow-y
+                this.scrollWindow = this.$list();
+
+                // track scroll by swiping or mouse
+                this.scrollWindow.addEventListener("scroll", this.setScroll.bind(this), true);
+
+            },
+            listReady: function () {
+
+                // set rab-vsliders maxScroll
+                this.maxScroll = this.scrollWindow.scrollHeight - this.scrollWindow.offsetHeight;
+
+                // set dividers from core-list
+                this.dividers = this.scrollWindow._physicalDividers;
+
+            },
+            setScroll: function () {
+
+                // update rab-vslider position
+                if (!this.dragging) this.currentScroll = this.scrollWindow.scrollTop;
+
+            },
+            scroll: function (e, detail, scrollbar) {
+
+                var     dividers = this.dividers,
+                        scrollWindow = this.$list(),
+                        scrollBarPosition = scrollbar._x,
+                        scrollDirection = scrollBarPosition > this.lastScrollTop ? "down" : "up";
+
+                this.lastScrollTop = scrollBarPosition;
+
+                // set rab-vslider bubble after passing divider in core-list
+                if(dividers) {
+
+                    for (var i = 0; i < dividers.length; ++i) {
+
+                        if (dividers[i].hidden) continue; // skip over hidden dividers
+
+                        var     divider = dividers[i],
+                                dividerTop = divider.getBoundingClientRect().top,
+                                dividerText = divider.innerText;
+
+                        // scrolling down
+                        if (scrollDirection == "down" && scrollBarPosition >= dividerTop) this.sectionValue = dividerText
+
+                        // scrolling up
+                        if (scrollDirection == "up" && dividerTop <= scrollBarPosition) this.sectionValue = dividerText
+
+                    }
+
+                }
+
+                // set window after scrolling with rab-vslider
+                if (this.dragging) scrollWindow.setScrollTop(scrollBar.immediateValue);
+
+            }
+        });
+    </script>
+</polymer-element>
