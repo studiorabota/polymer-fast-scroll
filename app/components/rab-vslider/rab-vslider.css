@@ -38,7 +38,8 @@
     transform: rotate(90deg);
 
     -webkit-transform-origin: 0% 0.1%;
-    width: 95vh;
+    width: 90vh;
+    top: 5vh;
     margin-left: 40px;
 }
 
@@ -169,10 +170,10 @@
 .pin > #sliderKnob > #sliderKnobInner::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: -7px;
-    width: 40px;
-    height: 40px;
+    top: 5px;
+    left: -23px;
+    width: 70px;
+    height: 70px;
     margin-left: 3px;
     border-radius: 50% 50% 50% 0;
     -webkit-transform: rotate(135deg) scale(0) translate(0);
@@ -197,20 +198,21 @@
 .pin > #sliderKnob > #sliderKnobInner::after {
     content: attr(value);
     position: absolute;
-    top: 2px;
+    top: 0;
     left: 0;
-    width: 32px;
-    height: 26px;
+    width: 30px;
+    height: 30px;
+    line-height: 1;
     text-align: center;
     color: #fff;
-    font-size: 16px;
-    -webkit-transform: scale(0) translate(0);
-    transform: scale(0) translate(0);
+    font-size: 30px;
+    -webkit-transform: rotate(-90deg) scale(0) translate(0);
+    transform: rotate(-90deg) scale(0) translate(0);
 }
 
 .pin.expand > #sliderKnob > #sliderKnobInner::after {
-    -webkit-transform: scale(1) translate(0, 32px);
-    transform: scale(1) translate(0, 32px);
+    -webkit-transform: rotate(-90deg) scale(1) translate(-48px, 0);
+    transform: rotate(-90deg) scale(1) translate(-48px, 0);
 }
 
 .slider-input {

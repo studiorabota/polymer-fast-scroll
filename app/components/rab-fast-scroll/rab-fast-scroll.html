@@ -7,20 +7,49 @@
         <style>
             #scrollWindow {
                 height: 100%;
-                background: #6200EA;
+                background: #ffffff;
                 overflow: auto;
             }
             .divider, .item  {
-                background:#6200EA;
                 text-align: center;
                 font-size: 30px;
                 padding-top: 30px;
                 padding-bottom: 30px;
-                color:#ffffff;
+                color:#fff;
+                background: #651FFF;
             }
             .item {
-                background: #651FFF;
-                border-top:1px solid #6200EA;
+                color: #fff;
+                background: #7C4DFF;
+                border-bottom:1px solid #651FFF;
+            }
+
+
+            /* not active */
+            rab-vslider::shadow .ring > #sliderKnob > #sliderKnobInner {
+                background-color: #43A047;
+                border-color: #43A047;
+            }
+
+            rab-vslider::shadow .pin.ring > #sliderKnob > #sliderKnobInner::before {
+                background-color: #43A047;
+            }
+
+            /* active */
+            rab-vslider::shadow #sliderBar::shadow #activeProgress {
+                background-color: #43A047;
+            }
+            rab-vslider::shadow #sliderKnobInner {
+                background-color: #43A047;
+            }
+            rab-vslider::shadow #sliderKnobInner::before {
+                background-color: #43A047;
+            }
+            rab-vslider::shadow #sliderKnob > #sliderKnobInner::after {
+                color: #fff;
+            }
+            rab-vslider::shadow #sliderBar::shadow #progressContainer {
+                display: none;
             }
         </style>
 
@@ -29,8 +58,6 @@
                      value="{{currentScroll}}"
                      pin="true"
                      on-immediate-value-change="{{scroll}}"
-                     on-change="{{change}}"
-                     on-core-change="{{coreChange}}"
                      rotate="true"
                      dragging="{{dragging}}"
                      sectionValue="{{sectionValue}}"
@@ -39,7 +66,7 @@
         <!--<rab-list show="all" on-rab-list-ready="{{listReady}}"></rab-list>-->
 
         <!--<core-list data="{{data}}" groups="{{groups}}" scrollTarget="{{scrollTarget}}" flex>-->
-        <core-list data="{{data}}" groups="{{groups}}" id="scrollWindow" flex>
+        <core-list data="{{data}}" groups="{{groups}}" id="scrollWindow" runwayFactor="2000" flex>
             <template>
                 <div divider class="divider">{{groupModel.letter}}</div>
                 <div class="item">{{model.name}}</div>
@@ -57,9 +84,9 @@
             },
             data: [
 
-                [ { name: 'Adam' }, { name: 'Alex' } ],
-                [ { name: 'Bob' } ],
-                [ { name: 'Chuck' }, { name: 'Cathy' } ]
+                [ { name: 'Adam' }, { name: 'Alex' }, { name: 'Adam' }, { name: 'Alex' }, { name: 'Adam' }, { name: 'Alex' }, { name: 'Adam' }, { name: 'Alex' } ],
+                [ { name: 'Bob' }, { name: 'Bob' }, { name: 'Bob' }, { name: 'Bob' } ],
+                [ { name: 'Chuck' }, { name: 'Cathy' }, { name: 'Chuck' }, { name: 'Cathy' }, { name: 'Chuck' }, { name: 'Cathy' } ]
 
             ],
             groups: [
@@ -85,8 +112,13 @@
             },
             listReady: function () {
 
+
                 // set rab-vsliders maxScroll
+                //if(!this.maxScroll)
                 this.maxScroll = this.scrollWindow.scrollHeight - this.scrollWindow.offsetHeight;
+
+                console.log('ready' + this.maxScroll);
+
 
                 // set dividers from core-list
                 this.dividers = this.scrollWindow._physicalDividers;
@@ -99,6 +131,8 @@
 
             },
             scroll: function (e, detail, scrollBar) {
+
+                console.log(this.maxScroll);
 
                 var     dividers = this.dividers,
                         scrollWindow = this.$list(),
