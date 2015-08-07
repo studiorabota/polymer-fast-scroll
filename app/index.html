@@ -30,7 +30,56 @@
           href="components/rab-list/rab-list.html">
 
     <!-- Style -->
-    <link rel="stylesheet" href="app.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            background-color: #E5E5E5;
+            font-family: 'RobotoDraft', sans-serif;
+        }
+
+        core-header-panel {
+            height: 100%;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        core-toolbar {
+            background: #039BE5;
+            color: white;
+        }
+
+        paper-tabs::shadow {
+            width: 100%;
+            margin: 0;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            text-transform: uppercase;
+        }
+        paper-tabs::shadow #selectionBar {
+            background-color: #fff;
+        }
+        paper-tabs paper-tab::shadow #ink {
+            color: #fff;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .slider {
+            position: fixed;
+            z-index: 999;
+            width: 50px;
+        }
+
+        .slider-right {
+            right: 0px;
+        }
+    </style>
 
 </head>
 
@@ -55,13 +104,6 @@
     <rab-fast-scroll fit></rab-fast-scroll>
 
 </core-header-panel>
-
-<script>
-    var container = document.querySelector('#container');
-    container.addEventListener('said-hello', function (e) {
-        alert('outside: Said hi to ' + e.detail.name + ' from ' + e.target.localName);
-    });
-</script>
 
 </body>
 

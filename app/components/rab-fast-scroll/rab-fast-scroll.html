@@ -9,9 +9,8 @@
         <link rel="stylesheet" href="rab-fast-scroll.css">
 
         <style>
-            .test {
+            .wrapper {
                 height: 100%;
-                bakground-color: red;
             }
         </style>
 
@@ -25,14 +24,14 @@
                      sectionValue="{{sectionValue}}"
                      id="slider"></rab-vslider>
 
-        <div class="test">
-            <core-list data="{{data}}" groups="{{groups}}" id="scrollWindow" flex>
+        <div class="wrapper">
+            <core-list data="{{data}}" groups="{{groups}}" id="scrollWindow" runwayFactor="2000" flex>
                 <template>
-                    <div divider class="divider">{{groupModel.letter}}</div>
+                    <div divider class="divider"><div class="letter">{{groupModel.letter}}</div></div>
 
                     <div class="item" horizontal layout>
                         <paper-button flex>
-                            <div class="avatar {{model.color}}">V</div>
+                            <div class="avatar {{model.color}}">{{groupModel.letter}}</div>
                             <div class="name" flex>{{model.name}}</div>
                         </paper-button>
                     </div>
@@ -47,7 +46,8 @@
         Polymer('rab-fast-scroll', {
 
             observe: {
-                '$.scrollWindow._viewportSize': 'listReady' // Viewport ready
+                '$.scrollWindow._viewportSize': 'listReady', // Viewport ready
+                '$.slider.expand': 'scroll' // Scroll bar clicked
             },
             data: [
 
@@ -79,16 +79,14 @@
             },
             listReady: function () {
 
-
                 // set rab-vsliders maxScroll
-                //if(!this.maxScroll)
                 this.maxScroll = this.scrollWindow.scrollHeight - this.scrollWindow.offsetHeight;
-
-                console.log('ready' + this.maxScroll);
-
 
                 // set dividers from core-list
                 this.dividers = this.scrollWindow._physicalDividers;
+
+                // set rab-vsliders same height as window
+                this.$.slider.shadowRoot.querySelector('#sliderContainer').style.width = (this.scrollWindow.offsetHeight - 60) + "px";
 
             },
             setScroll: function () {
@@ -97,14 +95,13 @@
                 if (!this.dragging) this.currentScroll = this.scrollWindow.scrollTop;
 
             },
-            scroll: function (e, detail, scrollBar) {
-
-                console.log(this.maxScroll);
+            scroll: function (e, detail, sender) {
 
                 var     dividers = this.dividers,
                         scrollWindow = this.$list(),
-                        scrollBarPosition = scrollBar._x,
-                        scrollDirection = scrollBarPosition > this.lastScrollTop ? "down" : "up";
+                        scrollBar = this.$.slider,
+                        scrollBarPosition = scrollBar._x ? scrollBar._x : this.$.slider.shadowRoot.querySelector('#sliderKnob').offsetLeft,
+                        scrollDirection = scrollBarPosition < this.lastScrollTop ? "up" : "down";
 
                 this.lastScrollTop = scrollBarPosition;
 
@@ -116,8 +113,12 @@
                         if (dividers[i].hidden) continue; // skip over hidden dividers
 
                         var     divider = dividers[i],
-                                dividerTop = divider.getBoundingClientRect().top,
+                                dividerTop = divider.getBoundingClientRect().top - (window.innerHeight - scrollWindow.offsetHeight), // take of header height
                                 dividerText = divider.innerText;
+//                        console.log(scrollBarPosition + " " + dividerTop)
+
+                        // no scroll, just click
+                        if (typeof scrollBarPosition === "undefined"  && scrollBarPosition >= dividerTop) this.sectionValue = dividerText;
 
                         // scrolling down
                         if (scrollDirection == "down" && scrollBarPosition >= dividerTop) this.sectionValue = dividerText

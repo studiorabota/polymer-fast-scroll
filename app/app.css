@@ -16,6 +16,15 @@ core-toolbar {
     color: white;
 }
 
+paper-tabs::shadow {
+    width: 100%;
+    margin: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-transform: uppercase;
+}
 paper-tabs.pink::shadow #selectionBar {
     background-color: #fff;
 }

@@ -21,9 +21,11 @@
     opacity: 1;
     background-color: transparent;
     margin-left: 9px;
-    margin-top: 25px;
     z-index: 999;
     height: 1px;
+}
+.divider .letter {
+    transform: translateY(24px);
 }
 .item {
     color: #000;
@@ -69,10 +71,16 @@ rab-vslider::shadow .ring > #sliderKnob > #sliderKnobInner {
     border-radius: 5px;
     height: 3px;
 }
+rab-vslider::shadow .ring.expand > #sliderKnob > #sliderKnobInner {
+    background-color: #03a9f4;
+    border-color: #03a9f4;
+}
 
 rab-vslider::shadow .pin.ring > #sliderKnob > #sliderKnobInner::before {
     background-color: #03a9f4;
 }
+
+
 
 /* active */
 rab-vslider::shadow #sliderBar::shadow #activeProgress {
