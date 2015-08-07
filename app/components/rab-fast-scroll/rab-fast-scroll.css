@@ -1,20 +1,96 @@
-:host {
-
-}
-
 #scrollWindow {
-    height: 100vh;
-    overflow-y: scroll;
-    display: block;
-    width: 100%;
-    margin: 0 auto;
-}
-
-#listPins {
-    min-height: 200px;
-}
-
-#content {
-    height: 400px;
+    height: 100%;
+    background: #ffffff;
     overflow: auto;
+}
+.divider, .item  {
+    text-align: center;
+    font-size: 30px;
+    color:#fff;
+    background: #651FFF;
+}
+.divider {
+    text-align: left;
+    padding-left: 10px;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 40px !important;
+    color: gray;
+    left: 0px;
+    opacity: 1;
+    background-color: transparent;
+    margin-left: 9px;
+    margin-top: 25px;
+    z-index: 999;
+    height: 1px;
+}
+.item {
+    color: #000;
+    background: #fff;
+    font-size:14px;
+    padding-left: 60px;
+    padding-right: 50px;
+
+}
+
+/* button */
+paper-button {
+
+}
+
+.avatar {
+    background-color: #43A047;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    line-height: 2.4;
+    color: #fff;
+    font-size: 16px;
+}
+.avatar.blue {
+    background-color: #2979FF;
+}
+.avatar.pink {
+    background-color: #F50057;
+}
+
+.name {
+    text-align: left;
+    padding-left: 20px;
+    text-transform: initial !important;
+}
+
+/* not active */
+rab-vslider::shadow .ring > #sliderKnob > #sliderKnobInner {
+    background-color: #757575;
+    border-color: #757575;
+    width: 40px;
+    border-radius: 5px;
+    height: 3px;
+}
+
+rab-vslider::shadow .pin.ring > #sliderKnob > #sliderKnobInner::before {
+    background-color: #03a9f4;
+}
+
+/* active */
+rab-vslider::shadow #sliderBar::shadow #activeProgress {
+    background-color: #03a9f4;
+}
+rab-vslider::shadow #sliderKnobInner {
+    background-color: #03a9f4;
+    border-color: #03a9f4;
+    width: 40px;
+    border-radius: 5px;
+    height: 3px;
+}
+rab-vslider::shadow #sliderKnobInner::before {
+    background-color: #03a9f4;
+}
+rab-vslider::shadow #sliderKnob > #sliderKnobInner::after {
+    color: #fff;
+}
+rab-vslider::shadow #sliderBar::shadow #progressContainer {
+    display: none;
 }

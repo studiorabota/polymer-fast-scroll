@@ -1,55 +1,17 @@
 <link rel="import" href="../../../components/polymer/polymer.html">
 <link rel="import" href="../../../components/core-list/core-list.html">
+<link rel="import" href="../../../components/paper-button/paper-button.html">
+<link rel="import" href="../../../components/paper-fab/paper-fab.html">
 
 <polymer-element name="rab-fast-scroll">
     <template>
 
+        <link rel="stylesheet" href="rab-fast-scroll.css">
+
         <style>
-            #scrollWindow {
+            .test {
                 height: 100%;
-                background: #ffffff;
-                overflow: auto;
-            }
-            .divider, .item  {
-                text-align: center;
-                font-size: 30px;
-                padding-top: 30px;
-                padding-bottom: 30px;
-                color:#fff;
-                background: #651FFF;
-            }
-            .item {
-                color: #fff;
-                background: #7C4DFF;
-                border-bottom:1px solid #651FFF;
-            }
-
-
-            /* not active */
-            rab-vslider::shadow .ring > #sliderKnob > #sliderKnobInner {
-                background-color: #43A047;
-                border-color: #43A047;
-            }
-
-            rab-vslider::shadow .pin.ring > #sliderKnob > #sliderKnobInner::before {
-                background-color: #43A047;
-            }
-
-            /* active */
-            rab-vslider::shadow #sliderBar::shadow #activeProgress {
-                background-color: #43A047;
-            }
-            rab-vslider::shadow #sliderKnobInner {
-                background-color: #43A047;
-            }
-            rab-vslider::shadow #sliderKnobInner::before {
-                background-color: #43A047;
-            }
-            rab-vslider::shadow #sliderKnob > #sliderKnobInner::after {
-                color: #fff;
-            }
-            rab-vslider::shadow #sliderBar::shadow #progressContainer {
-                display: none;
+                bakground-color: red;
             }
         </style>
 
@@ -63,15 +25,20 @@
                      sectionValue="{{sectionValue}}"
                      id="slider"></rab-vslider>
 
-        <!--<rab-list show="all" on-rab-list-ready="{{listReady}}"></rab-list>-->
+        <div class="test">
+            <core-list data="{{data}}" groups="{{groups}}" id="scrollWindow" flex>
+                <template>
+                    <div divider class="divider">{{groupModel.letter}}</div>
 
-        <!--<core-list data="{{data}}" groups="{{groups}}" scrollTarget="{{scrollTarget}}" flex>-->
-        <core-list data="{{data}}" groups="{{groups}}" id="scrollWindow" runwayFactor="2000" flex>
-            <template>
-                <div divider class="divider">{{groupModel.letter}}</div>
-                <div class="item">{{model.name}}</div>
-            </template>
-        </core-list>
+                    <div class="item" horizontal layout>
+                        <paper-button flex>
+                            <div class="avatar {{model.color}}">V</div>
+                            <div class="name" flex>{{model.name}}</div>
+                        </paper-button>
+                    </div>
+                </template>
+            </core-list>
+        </div>
 
     </template>
 
@@ -84,7 +51,7 @@
             },
             data: [
 
-                [ { name: 'Adam' }, { name: 'Alex' }, { name: 'Adam' }, { name: 'Alex' }, { name: 'Adam' }, { name: 'Alex' }, { name: 'Adam' }, { name: 'Alex' } ],
+                [ { name: 'Vincent Kranendonk', color:'blue' }, { name: 'Alex', color:'pink' }, { name: 'Adam' }, { name: 'Alex' }, { name: 'Adam' }, { name: 'Alex' }, { name: 'Adam' }, { name: 'Alex' } ],
                 [ { name: 'Bob' }, { name: 'Bob' }, { name: 'Bob' }, { name: 'Bob' } ],
                 [ { name: 'Chuck' }, { name: 'Cathy' }, { name: 'Chuck' }, { name: 'Cathy' }, { name: 'Chuck' }, { name: 'Cathy' } ]
 

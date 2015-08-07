@@ -29,73 +29,32 @@
     <link rel="import"
           href="components/rab-list/rab-list.html">
 
-    <!--<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>-->
-
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            background-color: #E5E5E5;
-            font-family: 'RobotoDraft', sans-serif;
-        }
-
-        core-header-panel {
-            height: 100%;
-            overflow: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        core-toolbar {
-            background: #03a9f4;
-            color: white;
-        }
-
-        #tabs {
-            width: 100%;
-            margin: 0;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            text-transform: uppercase;
-        }
-
-        .container {
-            width: 80%;
-            margin: 0 auto;
-        }
-
-        @media (min-width: 481px) {
-            #tabs {
-                width: 200px;
-            }
-
-            .container {
-                width: 400px;
-            }
-        }
-
-        .slider {
-            position: fixed;
-            z-index: 999;
-            width: 50px;
-        }
-
-        .slider-right {
-            right: 0px;
-        }
-
-    </style>
+    <!-- Style -->
+    <link rel="stylesheet" href="app.css">
 
 </head>
 
 <body unresolved>
 
-<rab-fast-scroll></rab-fast-scroll>
 
-<div id="container">
-    <my-app></my-app>
-</div>
+<core-header-panel>
+
+    <core-toolbar class="medium-tall">
+
+        <span flex>Contacts</span>
+        <core-icon-button icon="search"></core-icon-button>
+        <paper-icon-button id="morebutton" icon="more-vert"></paper-icon-button>
+
+        <paper-tabs id="tabs" class="bottom fit" selected="all" self-end>
+            <paper-tab name="all">Favourites</paper-tab>
+            <paper-tab name="favorites">All contacts</paper-tab>
+        </paper-tabs>
+
+    </core-toolbar>
+
+    <rab-fast-scroll fit></rab-fast-scroll>
+
+</core-header-panel>
 
 <script>
     var container = document.querySelector('#container');

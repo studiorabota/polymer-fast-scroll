@@ -1,0 +1,39 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: #E5E5E5;
+    font-family: 'RobotoDraft', sans-serif;
+}
+
+core-header-panel {
+    height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+core-toolbar {
+    background: #03a9f4;
+    color: white;
+}
+
+paper-tabs.pink::shadow #selectionBar {
+    background-color: #fff;
+}
+paper-tabs.pink paper-tab::shadow #ink {
+    color: #fff;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.slider {
+    position: fixed;
+    z-index: 999;
+    width: 50px;
+}
+
+.slider-right {
+    right: 0px;
+}
