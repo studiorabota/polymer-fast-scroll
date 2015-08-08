@@ -1,6 +1,6 @@
 :host {
     display: inline-block;
-    width: 50px;
+    width: 40px;
     cursor: default;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -38,6 +38,8 @@
     -webkit-transform-origin: 0% 0.1%;
     top: 14px;
     margin-left: 40px;
+    /* do not show sliderbar */
+    height: 0px;
 }
 
 .bar-container {
@@ -146,6 +148,7 @@
     border-radius: 50%;
     background-color: #3f51b5;
     transition: height 0.18s ease, width 0.18s ease;
+    margin-top: -8px;
 }
 
 .expand:not(.pin) > #sliderKnob > #sliderKnobInner {
@@ -167,8 +170,8 @@
 .pin > #sliderKnob > #sliderKnobInner::before {
     content: "";
     position: absolute;
-    top: 5px;
-    left: -23px;
+    top: 8px;
+    left: -40px;
     width: 70px;
     height: 70px;
     margin-left: 3px;
@@ -188,15 +191,15 @@
 }
 
 .pin.expand > #sliderKnob > #sliderKnobInner::before {
-    -webkit-transform: rotate(135deg) scale(1) translate(17px, -17px);
-    transform: rotate(135deg) scale(1) translate(17px, -17px);
+    -webkit-transform: rotate(180deg) scale(1) translate(17px, -17px);
+    transform: rotate(180deg) scale(1) translate(17px, -17px);
 }
 
 .pin > #sliderKnob > #sliderKnobInner::after {
     content: attr(value);
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -4px;
+    left: -33px;
     width: 30px;
     height: 30px;
     line-height: 1;

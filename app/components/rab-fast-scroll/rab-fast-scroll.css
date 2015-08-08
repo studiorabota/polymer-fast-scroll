@@ -1,5 +1,6 @@
 #scrollWindow {
     height: 100%;
+    width: calc(100% + 30px);
     background: #ffffff;
     overflow: auto;
 }
