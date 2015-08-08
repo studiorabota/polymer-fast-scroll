@@ -1,5 +1,5 @@
 {
-    "name": "rab-vslider",
+    "name": "rab-scroll-bar",
     "dependencies": {
         "font-roboto": "Polymer/font-roboto#^0.5",
         "paper-input": "Polymer/paper-input#^0.5",
@@ -12,7 +12,7 @@
         "Vincent Kranendonk <kranendonk.vincent@gmail.com>"
     ],
     "description": "Polymer fast scroll slider",
-    "main": "rab-vslider.html",
+    "main": "rab-scroll-bar.html",
     "keywords": [
         "polymer",
         "paper",

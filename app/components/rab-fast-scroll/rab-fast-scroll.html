@@ -14,7 +14,7 @@
             }
         </style>
 
-        <rab-vslider min="0"
+        <rab-scroll-bar min="0"
                      max="{{maxScroll}}"
                      value="{{currentScroll}}"
                      pin="true"
@@ -22,7 +22,7 @@
                      rotate="true"
                      dragging="{{dragging}}"
                      sectionValue="{{sectionValue}}"
-                     id="slider"></rab-vslider>
+                     id="slider"></rab-scroll-bar>
 
         <div class="wrapper">
             <core-list data="{{data}}" groups="{{groups}}" id="scrollWindow" runwayFactor="2000" flex>
@@ -79,19 +79,19 @@
             },
             listReady: function () {
 
-                // set rab-vsliders maxScroll
+                // set rab-scroll-bars maxScroll
                 this.maxScroll = this.scrollWindow.scrollHeight - this.scrollWindow.offsetHeight;
 
                 // set dividers from core-list
                 this.dividers = this.scrollWindow._physicalDividers;
 
-                // set rab-vsliders same height as window
+                // set rab-scroll-bars same height as window
                 this.$.slider.shadowRoot.querySelector('#sliderContainer').style.width = (this.scrollWindow.offsetHeight - 60) + "px";
 
             },
             setScroll: function () {
 
-                // update rab-vslider position
+                // update rab-scroll-bar position
                 if (!this.dragging) this.currentScroll = this.scrollWindow.scrollTop;
 
             },
@@ -105,7 +105,7 @@
 
                 this.lastScrollTop = scrollBarPosition;
 
-                // set rab-vslider bubble after passing divider in core-list
+                // set rab-scroll-bar bubble after passing divider in core-list
                 if(dividers) {
 
                     for (var i = 0; i < dividers.length; ++i) {
@@ -130,7 +130,7 @@
 
                 }
 
-                // set window after scrolling with rab-vslider
+                // set window after scrolling with rab-scroll-bar
                 if (this.dragging) scrollWindow.setScrollTop(scrollBar.immediateValue);
 
             }

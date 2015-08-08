@@ -79,41 +79,41 @@ paper-button {
 }
 
 /* not active */
-rab-vslider::shadow .ring > #sliderKnob > #sliderKnobInner {
+rab-scroll-bar::shadow .ring > #sliderKnob > #sliderKnobInner {
     background-color: #757575;
     border-color: #757575;
     width: 40px;
     border-radius: 5px;
     height: 3px;
 }
-rab-vslider::shadow .ring.expand > #sliderKnob > #sliderKnobInner {
+rab-scroll-bar::shadow .ring.expand > #sliderKnob > #sliderKnobInner {
     background-color: #0288D1;
     border-color: #0288D1;
 }
 
-rab-vslider::shadow .pin.ring > #sliderKnob > #sliderKnobInner::before {
+rab-scroll-bar::shadow .pin.ring > #sliderKnob > #sliderKnobInner::before {
     background-color: #0288D1;
 }
 
 
 
 /* active */
-rab-vslider::shadow #sliderBar::shadow #activeProgress {
+rab-scroll-bar::shadow #sliderBar::shadow #activeProgress {
     background-color: #0288D1;
 }
-rab-vslider::shadow #sliderKnobInner {
+rab-scroll-bar::shadow #sliderKnobInner {
     background-color: #0288D1;
     border-color: #0288D1;
     width: 40px;
     border-radius: 5px;
     height: 3px;
 }
-rab-vslider::shadow #sliderKnobInner::before {
+rab-scroll-bar::shadow #sliderKnobInner::before {
     background-color: #0288D1;
 }
-rab-vslider::shadow #sliderKnob > #sliderKnobInner::after {
+rab-scroll-bar::shadow #sliderKnob > #sliderKnobInner::after {
     color: #fff;
 }
-rab-vslider::shadow #sliderBar::shadow #progressContainer {
+rab-scroll-bar::shadow #sliderBar::shadow #progressContainer {
     display: none;
 }

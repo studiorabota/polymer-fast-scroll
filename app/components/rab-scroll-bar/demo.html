@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>tk-vslider</title>
+    <title>tk-scroll-bar</title>
 
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -9,7 +9,7 @@
 
     <script src="../webcomponentsjs/webcomponents.js"></script>
 
-    <link rel="import" href="tk-vslider.html">
+    <link rel="import" href="tk-scroll-bar.html">
     <link rel="import" href="../font-roboto/roboto.html">
 
     <style shim-shadowdom>
@@ -20,7 +20,7 @@
             padding: 24px;
         }
 
-        tk-vslider {
+        tk-scroll-bar {
             width: 100%;
         }
 
@@ -34,14 +34,14 @@
             padding: 14px;
         }
 
-        .yellow-slider tk-vslider::shadow #sliderKnobInner,
-        .yellow-slider tk-vslider::shadow #sliderBar::shadow #activeProgress {
+        .yellow-slider tk-scroll-bar::shadow #sliderKnobInner,
+        .yellow-slider tk-scroll-bar::shadow #sliderBar::shadow #activeProgress {
             background-color: #f4b400;
         }
 
-        .green-slider tk-vslider::shadow #sliderKnobInner,
-        .green-slider tk-vslider::shadow #sliderKnobInner::before,
-        .green-slider tk-vslider::shadow #sliderBar::shadow #activeProgress {
+        .green-slider tk-scroll-bar::shadow #sliderKnobInner,
+        .green-slider tk-scroll-bar::shadow #sliderKnobInner::before,
+        .green-slider tk-scroll-bar::shadow #sliderBar::shadow #activeProgress {
             background-color: #0f9d58;
         }
 
@@ -58,19 +58,19 @@
 <section class="yellow-slider">
 
     <div>Music, video, games &amp; other media</div>
-    <tk-vslider value="50"></tk-vslider>
+    <tk-scroll-bar value="50"></tk-scroll-bar>
 
     <br>
     <br>
 
     <div>Notifications</div>
-    <tk-vslider value="50"></tk-vslider>
+    <tk-scroll-bar value="50"></tk-scroll-bar>
 
     <br>
     <br>
 
     <div>Alarms</div>
-    <tk-vslider value="80"></tk-vslider>
+    <tk-scroll-bar value="80"></tk-scroll-bar>
 
 </section>
 
@@ -80,7 +80,7 @@
 
     <div center horizontal layout>
         <div>R</div>
-        <tk-vslider value="23" max="255" editable></tk-vslider>
+        <tk-scroll-bar value="23" max="255" editable></tk-scroll-bar>
     </div>
 
     <br>
@@ -88,7 +88,7 @@
 
     <div center horizontal layout>
         <div>G</div>
-        <tk-vslider value="183" max="255" editable></tk-vslider>
+        <tk-scroll-bar value="183" max="255" editable></tk-scroll-bar>
     </div>
 
     <br>
@@ -96,7 +96,7 @@
 
     <div center horizontal layout>
         <div>B</div>
-        <tk-vslider value="211" max="255" editable></tk-vslider>
+        <tk-scroll-bar value="211" max="255" editable></tk-scroll-bar>
     </div>
 
 </section>
@@ -107,7 +107,7 @@
 
     <div>Brightness</div>
     <br>
-    <tk-vslider pin value="50"></tk-vslider>
+    <tk-scroll-bar pin value="50"></tk-scroll-bar>
 
 </section>
 
@@ -119,7 +119,7 @@
         <span>Ratings</span><span id="ratingsLabel"></span>
     </div>
     <br>
-    <tk-vslider id="ratings" pin snaps max="10" step="1" value="5"></tk-vslider>
+    <tk-scroll-bar id="ratings" pin snaps max="10" step="1" value="5"></tk-scroll-bar>
 
 </section>
 
