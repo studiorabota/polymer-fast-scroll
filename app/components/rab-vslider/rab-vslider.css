@@ -199,13 +199,13 @@
     content: attr(value);
     position: absolute;
     top: -4px;
-    left: -33px;
+    left: -35px;
     width: 30px;
     height: 30px;
     line-height: 1;
     text-align: center;
     color: #fff;
-    font-size: 30px;
+    font-size: 35px;
     -webkit-transform: rotate(-90deg) scale(0) translate(0);
     transform: rotate(-90deg) scale(0) translate(0);
 }

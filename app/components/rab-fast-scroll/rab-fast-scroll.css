@@ -3,6 +3,7 @@
     width: calc(100% + 30px);
     background: #ffffff;
     overflow: auto;
+    padding-bottom: 30px;
 }
 .divider, .item  {
     text-align: center;
@@ -44,18 +45,31 @@ paper-button {
 
 .avatar {
     background-color: #43A047;
-    width: 35px;
-    height: 35px;
+    width: 43px;
+    height: 43px;
     border-radius: 50%;
-    line-height: 2.4;
+    line-height: 1.35;
     color: #fff;
-    font-size: 16px;
+    font-weight: 100;
+    font-size: 33px;
 }
 .avatar.blue {
-    background-color: #2979FF;
+    background-color: #2196F3;
 }
 .avatar.pink {
+    background-color: #E91E63;
+}
+.avatar.purple {
+    background-color: #673AB7;
+}
+.avatar.red {
     background-color: #F50057;
+}
+.avatar.img {
+    background: url('img/_profile_small.jpg');
+}
+.avatar.img span {
+    display: none;
 }
 
 .name {
@@ -73,29 +87,29 @@ rab-vslider::shadow .ring > #sliderKnob > #sliderKnobInner {
     height: 3px;
 }
 rab-vslider::shadow .ring.expand > #sliderKnob > #sliderKnobInner {
-    background-color: #03a9f4;
-    border-color: #03a9f4;
+    background-color: #0288D1;
+    border-color: #0288D1;
 }
 
 rab-vslider::shadow .pin.ring > #sliderKnob > #sliderKnobInner::before {
-    background-color: #03a9f4;
+    background-color: #0288D1;
 }
 
 
 
 /* active */
 rab-vslider::shadow #sliderBar::shadow #activeProgress {
-    background-color: #03a9f4;
+    background-color: #0288D1;
 }
 rab-vslider::shadow #sliderKnobInner {
-    background-color: #03a9f4;
-    border-color: #03a9f4;
+    background-color: #0288D1;
+    border-color: #0288D1;
     width: 40px;
     border-radius: 5px;
     height: 3px;
 }
 rab-vslider::shadow #sliderKnobInner::before {
-    background-color: #03a9f4;
+    background-color: #0288D1;
 }
 rab-vslider::shadow #sliderKnob > #sliderKnobInner::after {
     color: #fff;
