@@ -1,9 +1,3 @@
-html, body {
-    height: 100%;
-    margin: 0;
-    background-color: #E5E5E5;
-    font-family: 'RobotoDraft', sans-serif;
-}
 
 core-header-panel {
     height: 100%;
@@ -12,11 +6,12 @@ core-header-panel {
 }
 
 core-toolbar {
-    background: #03a9f4;
+    background: #0288D1;
     color: white;
+    height: 110px;
 }
 
-paper-tabs::shadow {
+paper-tabs {
     width: 100%;
     margin: 0;
     -webkit-user-select: none;
@@ -25,10 +20,10 @@ paper-tabs::shadow {
     user-select: none;
     text-transform: uppercase;
 }
-paper-tabs.pink::shadow #selectionBar {
+paper-tabs::shadow #selectionBar {
     background-color: #fff;
 }
-paper-tabs.pink paper-tab::shadow #ink {
+paper-tabs paper-tab::shadow #ink {
     color: #fff;
 }
 
@@ -45,4 +40,15 @@ paper-tabs.pink paper-tab::shadow #ink {
 
 .slider-right {
     right: 0px;
+}
+
+paper-fab {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 999;
+    background: #0288D1;
+}
+paper-fab::shadow #ripple {
+    color: white;
 }

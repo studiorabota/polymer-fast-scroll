@@ -1,18 +1,12 @@
 <link rel="import" href="../../../components/polymer/polymer.html">
 <link rel="import" href="../../../components/core-list/core-list.html">
 <link rel="import" href="../../../components/paper-button/paper-button.html">
-<link rel="import" href="../../../components/paper-fab/paper-fab.html">
+
 
 <polymer-element name="rab-fast-scroll">
     <template>
 
         <link rel="stylesheet" href="rab-fast-scroll.css">
-
-        <style>
-            .wrapper {
-                height: 100%;
-            }
-        </style>
 
         <rab-scroll-bar min="0"
                      max="{{maxScroll}}"
@@ -25,6 +19,8 @@
                      id="slider"></rab-scroll-bar>
 
         <div class="wrapper">
+            <content></content>
+
             <core-list data="{{data}}" groups="{{groups}}" id="scrollWindow" runwayFactor="2000" flex>
                 <template>
                     <div divider class="divider"><div class="letter">{{groupModel.letter}}</div></div>
