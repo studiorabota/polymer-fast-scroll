@@ -20,6 +20,9 @@
           href="../components/core-toolbar/core-toolbar.html">
     <link rel="import"
           href="../components/paper-tabs/paper-tabs.html">
+    <link rel="import"
+          href="../components/core-icons/social-icons.html">
+
 
     <!-- Custom Components -->
     <link rel="import"
@@ -80,6 +83,17 @@
         .slider-right {
             right: 0px;
         }
+
+        paper-fab {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            z-index: 999;
+            background: #0288D1;
+        }
+        paper-fab::shadow #ripple {
+            color: white;
+        }
     </style>
 
 </head>
@@ -103,6 +117,8 @@
     </core-toolbar>
 
     <rab-fast-scroll fit></rab-fast-scroll>
+
+    <paper-fab icon="social:person-add"></paper-fab>
 
 </core-header-panel>
 
