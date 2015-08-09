@@ -1,0 +1,124 @@
+.wrapper {
+    height: 100%;
+    overflow: hidden;
+}
+
+#scrollWindow {
+    height: 100%;
+    width: calc(100% + 30px);
+    background: #ffffff;
+    overflow: auto;
+    padding-bottom: 30px;
+}
+.divider, .item  {
+    text-align: center;
+    font-size: 30px;
+    color:#fff;
+    background: #651FFF;
+}
+.divider {
+    text-align: left;
+    padding-left: 10px;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 40px !important;
+    color: gray;
+    left: 0px;
+    opacity: 1;
+    background-color: transparent;
+    margin-left: 9px;
+    z-index: 999;
+    height: 1px;
+}
+.divider .letter {
+    transform: translateY(24px);
+}
+.item {
+    color: #000;
+    background: #fff;
+    font-size:14px;
+    padding-left: 60px;
+    padding-right: 50px;
+
+}
+
+/* button */
+paper-button {
+
+}
+
+.avatar {
+    background-color: #43A047;
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    line-height: 1.35;
+    color: #fff;
+    font-weight: 100;
+    font-size: 33px;
+}
+.avatar.blue {
+    background-color: #2196F3;
+}
+.avatar.pink {
+    background-color: #E91E63;
+}
+.avatar.purple {
+    background-color: #673AB7;
+}
+.avatar.red {
+    background-color: #F50057;
+}
+.avatar.img {
+    background: url('img/_profile_small.jpg');
+}
+.avatar.img span {
+    display: none;
+}
+
+.name {
+    text-align: left;
+    padding-left: 20px;
+    text-transform: initial !important;
+}
+
+/* not active */
+rab-scroll-bar::shadow .ring > #sliderKnob > #sliderKnobInner {
+    background-color: #757575;
+    border-color: #757575;
+    width: 40px;
+    border-radius: 5px;
+    height: 3px;
+}
+rab-scroll-bar::shadow .ring.expand > #sliderKnob > #sliderKnobInner {
+    background-color: #0288D1;
+    border-color: #0288D1;
+}
+
+rab-scroll-bar::shadow .pin.ring > #sliderKnob > #sliderKnobInner::before {
+    background-color: #0288D1;
+}
+
+
+
+/* active */
+rab-scroll-bar::shadow #sliderBar::shadow #activeProgress {
+    background-color: #0288D1;
+}
+rab-scroll-bar::shadow #sliderKnobInner {
+    background-color: #0288D1;
+    border-color: #0288D1;
+    width: 40px;
+    border-radius: 5px;
+    height: 3px;
+}
+rab-scroll-bar::shadow #sliderKnobInner::before {
+    background-color: #0288D1;
+}
+rab-scroll-bar::shadow #sliderKnob > #sliderKnobInner::after {
+    color: #fff;
+}
+rab-scroll-bar::shadow #sliderBar::shadow #progressContainer {
+    display: none;
+}

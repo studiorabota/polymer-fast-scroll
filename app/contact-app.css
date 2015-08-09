@@ -1,0 +1,54 @@
+
+core-header-panel {
+    height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+core-toolbar {
+    background: #0288D1;
+    color: white;
+    height: 110px;
+}
+
+paper-tabs {
+    width: 100%;
+    margin: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-transform: uppercase;
+}
+paper-tabs::shadow #selectionBar {
+    background-color: #fff;
+}
+paper-tabs paper-tab::shadow #ink {
+    color: #fff;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.slider {
+    position: fixed;
+    z-index: 999;
+    width: 50px;
+}
+
+.slider-right {
+    right: 0px;
+}
+
+paper-fab {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 999;
+    background: #0288D1;
+}
+paper-fab::shadow #ripple {
+    color: white;
+}

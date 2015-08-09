@@ -1,0 +1,46 @@
+<!-- Polymer Components -->
+<link rel="import"
+      href="../components/core-header-panel/core-header-panel.html">
+<link rel="import"
+      href="../components/core-toolbar/core-toolbar.html">
+<link rel="import"
+      href="../components/paper-tabs/paper-tabs.html">
+<link rel="import"
+      href="../components/core-icons/social-icons.html">
+<link rel="import"
+      href="../../../components/paper-fab/paper-fab.html">
+
+<!-- Custom Components -->
+<link rel="import"
+      href="contact-list.html">
+
+<polymer-element name="contact-app" noscript>
+
+    <template>
+
+        <link rel="stylesheet"  href="contact-app.css">
+
+        <core-header-panel>
+
+            <core-toolbar>
+
+                <span flex>Contacts</span>
+                <core-icon-button icon="search"></core-icon-button>
+                <paper-icon-button id="morebutton" icon="more-vert"></paper-icon-button>
+
+                <paper-tabs id="tabs" class="bottom fit" selected="all" self-end>
+                    <paper-tab name="all">Favourites</paper-tab>
+                    <paper-tab name="favorites">All contacts</paper-tab>
+                </paper-tabs>
+
+            </core-toolbar>
+
+            <contact-list></contact-list>
+
+            <paper-fab icon="social:person-add"></paper-fab>
+
+        </core-header-panel>
+
+    </template>
+
+</polymer-element>

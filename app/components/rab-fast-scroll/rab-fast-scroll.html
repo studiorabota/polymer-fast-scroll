@@ -1,0 +1,135 @@
+<link rel="import" href="../../../components/polymer/polymer.html">
+<link rel="import" href="../../../components/core-list/core-list.html">
+<link rel="import" href="../../../components/paper-button/paper-button.html">
+
+
+<polymer-element name="rab-fast-scroll">
+    <template>
+
+        <link rel="stylesheet" href="rab-fast-scroll.css">
+
+        <rab-scroll-bar min="0"
+                     max="{{maxScroll}}"
+                     value="{{currentScroll}}"
+                     pin="true"
+                     on-immediate-value-change="{{scroll}}"
+                     rotate="true"
+                     dragging="{{dragging}}"
+                     sectionValue="{{sectionValue}}"
+                     id="slider"></rab-scroll-bar>
+
+        <div class="wrapper">
+            <content></content>
+
+            <core-list data="{{data}}" groups="{{groups}}" id="scrollWindow" runwayFactor="2000" flex>
+                <template>
+                    <div divider class="divider"><div class="letter">{{groupModel.letter}}</div></div>
+
+                    <div class="item" horizontal layout>
+                        <paper-button flex>
+                            <div class="avatar {{model.color}}"><span>{{groupModel.letter}}</span></div>
+                            <div class="name" flex>{{model.name}}</div>
+                        </paper-button>
+                    </div>
+                </template>
+            </core-list>
+        </div>
+
+    </template>
+
+    <script>
+
+        Polymer('rab-fast-scroll', {
+
+            observe: {
+                '$.scrollWindow._viewportSize': 'listReady', // Viewport ready
+                '$.slider.expand': 'scroll' // Scroll bar clicked
+            },
+            data: [
+
+                [ { name: 'Aaren Lundberg', color:'blue' }, { name: 'Aarika Barbagallo', color:'img' }, { name: 'Abagael Fogarty' }, { name: 'Abbey Jelks', color:'pink' }, { name: 'Abra Bohannan' }, { name: 'Ada Tomson' }, { name: 'Adele Sober', color:'purple' }, { name: 'Adore Reeves' } ],
+                [ { name: 'Brigitte Timmerman' }, { name: 'Barb Sands', color:'purple' }, { name: 'Blossom Pera', color:'red' }, { name: 'Brianna Buster' } ],
+                [ { name: 'Caren Unsworth', color:'pink' }, { name: 'Chia Trowell' }, { name: 'Clarita Steinhauer', color:'purple' }, { name: 'Cameron Colvin' } ]
+
+            ],
+            groups: [
+
+                { letter: 'A' },
+                { letter: 'B' },
+                { letter: 'C' }
+
+            ],
+            $list: function() {
+
+                return this.shadowRoot.querySelector('core-list');
+
+            },
+            ready: function () {
+
+                // create reference to scroll window with overflow-y
+                this.scrollWindow = this.$list();
+
+                // track scroll by swiping or mouse
+                this.scrollWindow.addEventListener("scroll", this.setScroll.bind(this), true);
+
+            },
+            listReady: function () {
+
+                // set rab-scroll-bars maxScroll
+                this.maxScroll = this.scrollWindow.scrollHeight - this.scrollWindow.offsetHeight;
+
+                // set dividers from core-list
+                this.dividers = this.scrollWindow._physicalDividers;
+
+                // set rab-scroll-bars same height as window
+                this.$.slider.shadowRoot.querySelector('#sliderContainer').style.width = (this.scrollWindow.offsetHeight - 60) + "px";
+
+            },
+            setScroll: function () {
+
+                // update rab-scroll-bar position
+                if (!this.dragging) this.currentScroll = this.scrollWindow.scrollTop;
+
+            },
+            scroll: function (e, detail, sender) {
+
+                var     dividers = this.dividers,
+                        scrollWindow = this.$list(),
+                        scrollBar = this.$.slider,
+                        scrollBarPosition = scrollBar._x ? scrollBar._x : this.$.slider.shadowRoot.querySelector('#sliderKnob').offsetLeft,
+                        scrollDirection = scrollBarPosition < this.lastScrollTop ? "up" : "down";
+
+                this.lastScrollTop = scrollBarPosition;
+
+                // set rab-scroll-bar bubble after passing divider in core-list
+                if(dividers) {
+
+                    for (var i = 0; i < dividers.length; ++i) {
+
+                        if (dividers[i].hidden) continue; // skip over hidden dividers
+
+                        var     divider = dividers[i],
+                                dividerTop = divider.getBoundingClientRect().top - (window.innerHeight - scrollWindow.offsetHeight), // take of header height
+                                dividerText = divider.innerText;
+//                        console.log(scrollBarPosition + " " + dividerTop)
+
+                        // no scroll, just click
+                        if (typeof scrollBarPosition === "undefined"  && scrollBarPosition >= dividerTop) this.sectionValue = dividerText;
+
+                        // scrolling down
+                        if (scrollDirection == "down" && scrollBarPosition >= dividerTop) this.sectionValue = dividerText
+
+                        // scrolling up
+                        if (scrollDirection == "up" && dividerTop <= scrollBarPosition) this.sectionValue = dividerText
+
+                    }
+
+                }
+
+                // set window after scrolling with rab-scroll-bar
+                if (this.dragging) scrollWindow.setScrollTop(scrollBar.immediateValue);
+
+            }
+        });
+    </script>
+</polymer-element>
