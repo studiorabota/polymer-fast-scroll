@@ -1,7 +1,51 @@
+/*
+* ScrollBar
+*/
+
+/* Color knob init state */
+rab-scroll-bar::shadow .ring > #scrollKnob > #scrollKnobInner {
+    /*background-color: #F44336;*/
+}
+
+/* Color knob after click */
+rab-scroll-bar::shadow .ring.expand > #scrollKnob > #scrollKnobInner {
+    /*background-color: #E91E63;*/
+}
+
+/* Color balloon after click */
+rab-scroll-bar::shadow .pin.ring > #scrollKnob > #scrollKnobInner::before {
+    /*background-color: #9C27B0;*/
+}
+
+/* Color knob when balloon expanded */
+rab-scroll-bar::shadow .pin.expand #scrollKnobInner {
+    /*background-color: #4CAF50;*/
+}
+
+/* Dragging: Color knob */
+rab-scroll-bar::shadow #scrollKnobInner {
+    /*background-color: #FF9800;*/
+}
+
+/* Dragging: Color balloon */
+rab-scroll-bar::shadow .pin > #scrollKnob > #scrollKnobInner::before {
+    /*background-color: #00BCD4;*/
+}
+
+/* Color text */
+rab-scroll-bar::shadow #scrollKnob > #scrollKnobInner::after {
+    color: white;
+}
+
 core-list {
     width: calc(100% + 32px); /* hide browser scrollbar */
     padding-bottom: 30px;
+    background: white;
 }
+
+/*
+* List
+*/
 
 .divider, .item  {
     text-align: center;
@@ -68,43 +112,4 @@ core-list {
     text-align: left;
     padding-left: 20px;
     text-transform: initial !important;
-}
-
-/*
-* Scrollbar settings
-*/
-
-/* Color knob init state */
-rab-scroll-bar::shadow .ring > #scrollKnob > #scrollKnobInner {
-    /*background-color: #F44336;*/
-}
-
-/* Color knob after click */
-rab-scroll-bar::shadow .ring.expand > #scrollKnob > #scrollKnobInner {
-    /*background-color: #E91E63;*/
-}
-
-/* Color balloon after click */
-rab-scroll-bar::shadow .pin.ring > #scrollKnob > #scrollKnobInner::before {
-    /*background-color: #9C27B0;*/
-}
-
-/* Color knob when balloon expanded */
-rab-scroll-bar::shadow .pin.expand #scrollKnobInner {
-    /*background-color: #4CAF50;*/
-}
-
-/* Dragging: Color knob */
-rab-scroll-bar::shadow #scrollKnobInner {
-    /*background-color: #FF9800;*/
-}
-
-/* Dragging: Color balloon */
-rab-scroll-bar::shadow .pin > #scrollKnob > #scrollKnobInner::before {
-    /*background-color: #00BCD4;*/
-}
-
-/* Color text */
-rab-scroll-bar::shadow #scrollKnob > #scrollKnobInner::after {
-    color: white;
 }

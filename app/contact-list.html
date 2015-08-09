@@ -14,7 +14,7 @@
 
         <link rel="stylesheet" href="contact-list.css">
 
-        <core-list data="{{data}}" groups="{{groups}}" runwayFactor="2000" fit>
+        <core-list data="{{data}}" groups="{{groups}}" id="scrollWindow" runwayFactor="2000" fit>
             <template>
                 <div divider class="divider"><div class="letter">{{groupModel.letter}}</div></div>
 
@@ -27,19 +27,13 @@
             </template>
         </core-list>
 
-        <rab-scroll-bar pin="true"></rab-scroll-bar>
+        <rab-scroll-bar pin="true" target="{{[#scrollWindow}}"></rab-scroll-bar>
 
     </template>
 
     <script>
         Polymer('contact-list', {
 
-            observe: {
-                // '$.scrollWindow._viewportSize': 'listReady', // Viewport ready
-            },
-            ready: function() {
-                
-            },
             data: [
 
             [ { name: 'Aaren Lundberg', color:'blue' }, { name: 'Aarika Barbagallo', color:'img' }, { name: 'Abagael Fogarty' }, { name: 'Abbey Jelks', color:'pink' }, { name: 'Abra Bohannan' }, { name: 'Ada Tomson' }, { name: 'Adele Sober', color:'purple' }, { name: 'Adore Reeves' } ],
