@@ -1,15 +1,8 @@
-.wrapper {
-    height: 100%;
-    overflow: auto;
-}
-
-#scrollWindow {
-    height: 100%;
-    width: calc(100% + 30px);
-    background: #ffffff;
-    overflow: auto;
+core-list {
+    width: calc(100% + 32px); /* hide browser scrollbar */
     padding-bottom: 30px;
 }
+
 .divider, .item  {
     text-align: center;
     font-size: 30px;
@@ -40,12 +33,6 @@
     font-size:14px;
     padding-left: 60px;
     padding-right: 50px;
-
-}
-
-/* button */
-paper-button {
-
 }
 
 .avatar {
@@ -83,42 +70,41 @@ paper-button {
     text-transform: initial !important;
 }
 
-/* not active */
-rab-scroll-bar::shadow .ring > #sliderKnob > #sliderKnobInner {
-    background-color: #757575;
-    border-color: #757575;
-    width: 40px;
-    border-radius: 5px;
-    height: 3px;
-}
-rab-scroll-bar::shadow .ring.expand > #sliderKnob > #sliderKnobInner {
-    background-color: #0288D1;
-    border-color: #0288D1;
+/*
+* Scrollbar settings
+*/
+
+/* Color knob init state */
+rab-scroll-bar::shadow .ring > #scrollKnob > #scrollKnobInner {
+    /*background-color: #F44336;*/
 }
 
-rab-scroll-bar::shadow .pin.ring > #sliderKnob > #sliderKnobInner::before {
-    background-color: #0288D1;
+/* Color knob after click */
+rab-scroll-bar::shadow .ring.expand > #scrollKnob > #scrollKnobInner {
+    /*background-color: #E91E63;*/
 }
 
+/* Color balloon after click */
+rab-scroll-bar::shadow .pin.ring > #scrollKnob > #scrollKnobInner::before {
+    /*background-color: #9C27B0;*/
+}
 
+/* Color knob when balloon expanded */
+rab-scroll-bar::shadow .pin.expand #scrollKnobInner {
+    /*background-color: #4CAF50;*/
+}
 
-/* active */
-rab-scroll-bar::shadow #sliderBar::shadow #activeProgress {
-    background-color: #0288D1;
+/* Dragging: Color knob */
+rab-scroll-bar::shadow #scrollKnobInner {
+    /*background-color: #FF9800;*/
 }
-rab-scroll-bar::shadow #sliderKnobInner {
-    background-color: #0288D1;
-    border-color: #0288D1;
-    width: 40px;
-    border-radius: 5px;
-    height: 3px;
+
+/* Dragging: Color balloon */
+rab-scroll-bar::shadow .pin > #scrollKnob > #scrollKnobInner::before {
+    /*background-color: #00BCD4;*/
 }
-rab-scroll-bar::shadow #sliderKnobInner::before {
-    background-color: #0288D1;
-}
-rab-scroll-bar::shadow #sliderKnob > #sliderKnobInner::after {
-    color: #fff;
-}
-rab-scroll-bar::shadow #sliderBar::shadow #progressContainer {
-    display: none;
+
+/* Color text */
+rab-scroll-bar::shadow #scrollKnob > #scrollKnobInner::after {
+    color: white;
 }
