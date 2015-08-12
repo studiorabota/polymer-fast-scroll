@@ -18,23 +18,6 @@
                      sectionValue="{{sectionValue}}"
                      id="slider"></rab-scroll-bar>
 
-        <div class="wrapper">
-            <content></content>
-
-            <core-list data="{{data}}" groups="{{groups}}" id="scrollWindow" runwayFactor="2000" flex>
-                <template>
-                    <div divider class="divider"><div class="letter">{{groupModel.letter}}</div></div>
-
-                    <div class="item" horizontal layout>
-                        <paper-button flex>
-                            <div class="avatar {{model.color}}"><span>{{groupModel.letter}}</span></div>
-                            <div class="name" flex>{{model.name}}</div>
-                        </paper-button>
-                    </div>
-                </template>
-            </core-list>
-        </div>
-
     </template>
 
     <script>
@@ -42,26 +25,12 @@
         Polymer('rab-fast-scroll', {
 
             observe: {
-                '$.scrollWindow._viewportSize': 'listReady', // Viewport ready
+                // '$.scrollWindow._viewportSize': 'listReady', // Viewport ready
                 '$.slider.expand': 'scroll' // Scroll bar clicked
             },
-            data: [
-
-                [ { name: 'Aaren Lundberg', color:'blue' }, { name: 'Aarika Barbagallo', color:'img' }, { name: 'Abagael Fogarty' }, { name: 'Abbey Jelks', color:'pink' }, { name: 'Abra Bohannan' }, { name: 'Ada Tomson' }, { name: 'Adele Sober', color:'purple' }, { name: 'Adore Reeves' } ],
-                [ { name: 'Brigitte Timmerman' }, { name: 'Barb Sands', color:'purple' }, { name: 'Blossom Pera', color:'red' }, { name: 'Brianna Buster' } ],
-                [ { name: 'Caren Unsworth', color:'pink' }, { name: 'Chia Trowell' }, { name: 'Clarita Steinhauer', color:'purple' }, { name: 'Cameron Colvin' } ]
-
-            ],
-            groups: [
-
-                { letter: 'A' },
-                { letter: 'B' },
-                { letter: 'C' }
-
-            ],
             $list: function() {
 
-                return this.shadowRoot.querySelector('core-list');
+                return this.parentNode.querySelector('core-list');
 
             },
             ready: function () {
@@ -71,6 +40,8 @@
 
                 // track scroll by swiping or mouse
                 this.scrollWindow.addEventListener("scroll", this.setScroll.bind(this), true);
+
+                // this.listReady();
 
             },
             listReady: function () {
@@ -130,6 +101,8 @@
                 if (this.dragging) scrollWindow.setScrollTop(scrollBar.immediateValue);
 
             }
+
         });
+
     </script>
 </polymer-element>

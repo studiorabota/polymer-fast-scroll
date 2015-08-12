@@ -10,6 +10,7 @@
 
     position: fixed;
     right: 0px;
+    top: 0px;
     z-index: 999;
 }
 
@@ -17,19 +18,19 @@
     outline: none;
 }
 
-#sliderContainer {
+#scrollContainer {
     position: relative;
     width: calc(100% - 32px);
     height: 32px;
 }
 
-#sliderContainer.editable {
+#scrollContainer.editable {
     float: left;
     width: calc(100% - 72px);
     margin: 12px 0;
 }
 
-#sliderContainer.rotate {
+#scrollContainer.rotate {
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
     -o-transform: rotate(90deg);
@@ -38,8 +39,8 @@
     -webkit-transform-origin: 0% 0.1%;
     top: 14px;
     margin-left: 40px;
-    /* do not show sliderbar */
     height: 0px;
+    width: 300px;
 }
 
 .bar-container {
@@ -66,7 +67,12 @@
     transition: none;
 }
 
-#sliderBar {
+.ring.expand > #scrollKnob > #scrollKnobInner {
+    background-color: #0288D1;
+    border-color: #0288D1;
+}
+
+#scrollBar {
     position: absolute;
     top: 15px;
     left: 0;
@@ -76,17 +82,17 @@
     margin: -8px 0;
 }
 
-.ring #sliderBar {
+.ring #scrollBar {
     left: -4px;
     width: calc(100% + 4px);
 }
 
-.ring.expand:not(.pin) #sliderBar {
+.ring.expand:not(.pin) #scrollBar {
     left: -14px;
     width: calc(100% + 14px);
 }
 
-.slider-markers {
+.scroll-markers {
     position: absolute;
     top: 15px;
     left: 15px;
@@ -96,8 +102,8 @@
     pointer-events: none;
 }
 
-.slider-markers::after,
-.slider-marker::after {
+.scroll-markers::after,
+.scroll-marker::after {
     content: "";
     display: block;
     width: 2px;
@@ -106,16 +112,16 @@
     background-color: black;
 }
 
-#sliderBar::shadow #activeProgress {
-    background-color: #3f51b5;
+#scrollBar::shadow #activeProgress {
+    background-color: #0288D1;
 }
 
-.transiting #sliderBar::shadow #activeProgress {
+.transiting #scrollBar::shadow #activeProgress {
     transition: -webkit-transform 0.08s ease;
     transition: transform 0.08s ease;
 }
 
-#sliderKnob {
+#scrollKnob {
     position: absolute;
     left: 0;
     top: 0;
@@ -123,51 +129,52 @@
     height: 32px;
 }
 
-.transiting > #sliderKnob {
+.transiting > #scrollKnob {
     transition: left 0.08s ease;
 }
 
-#sliderKnob:focus {
+#scrollKnob:focus {
     outline: none;
 }
 
-#sliderKnob.dragging {
+#scrollKnob.dragging {
     transition: none;
 }
 
-.snaps > #sliderKnob.dragging {
+.snaps > #scrollKnob.dragging {
     transition: -webkit-transform 0.08s ease;
     transition: transform 0.08s ease;
 }
 
-#sliderKnobInner {
-    width: 12px;
-    height: 12px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    border-radius: 50%;
-    background-color: #3f51b5;
+#scrollKnobInner {
     transition: height 0.18s ease, width 0.18s ease;
     margin-top: -8px;
+    background-color: #757575;
+    width: 40px;
+    border-radius: 5px;
+    height: 5px;
 }
 
-.expand:not(.pin) > #sliderKnob > #sliderKnobInner {
+.pin.expand #scrollKnobInner {
+    background-color: #0288D1;
+}
+
+.expand:not(.pin) > #scrollKnob > #scrollKnobInner {
     width: 100%;
     height: 100%;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
 }
 
-.ring > #sliderKnob > #sliderKnobInner {
-    background-color: transparent;
-    border: 2px solid #c8c8c8;
+.ring > #scrollKnob > #scrollKnobInner {
+    background-color: #757575;
 }
 
-#sliderKnobInner::before {
-    background-color: #3f51b5;
+#scrollKnobInner::before {
+    background-color: #0288D1;
 }
 
-.pin > #sliderKnob > #sliderKnobInner::before {
+.pin > #scrollKnob > #scrollKnobInner::before {
     content: "";
     position: absolute;
     top: 8px;
@@ -178,24 +185,25 @@
     border-radius: 50% 50% 50% 0;
     -webkit-transform: rotate(135deg) scale(0) translate(0);
     transform: rotate(135deg) scale(0) translate(0);
+    background-color: #0288D1;
 }
 
-#sliderKnobInner::before,
-#sliderKnobInner::after {
+#scrollKnobInner::before,
+#scrollKnobInner::after {
     transition: -webkit-transform .2s ease, background-color .18s ease;
     transition: transform .2s ease, background-color .18s ease;
 }
 
-.pin.ring > #sliderKnob > #sliderKnobInner::before {
-    background-color: #c8c8c8;
+.pin.ring > #scrollKnob > #scrollKnobInner::before {
+    background-color: #0288D1;
 }
 
-.pin.expand > #sliderKnob > #sliderKnobInner::before {
+.pin.expand > #scrollKnob > #scrollKnobInner::before {
     -webkit-transform: rotate(180deg) scale(1) translate(17px, -17px);
     transform: rotate(180deg) scale(1) translate(17px, -17px);
 }
 
-.pin > #sliderKnob > #sliderKnobInner::after {
+.pin > #scrollKnob > #scrollKnobInner::after {
     content: attr(value);
     position: absolute;
     top: -4px;
@@ -210,37 +218,37 @@
     transform: rotate(-90deg) scale(0) translate(0);
 }
 
-.pin.expand > #sliderKnob > #sliderKnobInner::after {
+.pin.expand > #scrollKnob > #scrollKnobInner::after {
     -webkit-transform: rotate(-90deg) scale(1) translate(-48px, 0);
     transform: rotate(-90deg) scale(1) translate(-48px, 0);
 }
 
-.slider-input {
+.scroll-input {
     width: 40px;
     float: right;
     overflow: hidden;
 }
 
-.slider-input::shadow input {
+.scroll-input::shadow input {
     text-align: center;
 }
 
 /* disabled state */
 
-#sliderContainer.disabled {
+#scrollContainer.disabled {
     pointer-events: none;
 }
 
-.disabled > #sliderKnob > #sliderKnobInner {
+.disabled > #scrollKnob > #scrollKnobInner {
     width: 8px;
     height: 8px;
-    background-color: #c8c8c8;
+    background-color: #757575;
 }
 
-.disabled.ring > #sliderKnob > #sliderKnobInner {
+.disabled.ring > #scrollKnob > #scrollKnobInner {
     background-color: transparent;
 }
 
-#sliderContainer.disabled #sliderBar::shadow #activeProgress {
-    background-color: #c8c8c8;
+#scrollContainer.disabled #scrollBar::shadow #activeProgress {
+    background-color: #757575;
 }
