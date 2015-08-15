@@ -667,6 +667,11 @@ html /deep/ .paper-shadow-bottom-z-5 {
 
 
 
+
+
+
+
+
 <!-- Custom Components -->
 
 
@@ -674,7 +679,7 @@ html /deep/ .paper-shadow-bottom-z-5 {
 
 
 
-<!-- Custom Components -->
+
 
 
 <style shim-shadowdom="">
@@ -683,6 +688,13 @@ html /deep/ .paper-shadow-bottom-z-5 {
   }
 </style>
 
+
+
+
+
+
+
+<!-- Custom Components -->
 
 
 
@@ -705,18 +717,6 @@ html /deep/ .paper-shadow-bottom-z-5 {
     outline: none;
   }
 </style>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -3853,6 +3853,136 @@ polyfill-next-selector { content: '#tabsContent > *:not(#selectionBar)'; }
   </script>
 </polymer-element>
 
+<polymer-element name="core-icon-button" attributes="src icon active" assetpath="../components/core-icon-button/">
+
+  <template>
+    <style>/*
+Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE
+The complete set of authors may be found at http://polymer.github.io/AUTHORS
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS
+*/
+
+:host {
+  display: inline-block;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  border-radius: 2px;
+  padding: 7px;
+  margin: 2px;
+  vertical-align: middle;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+:host([disabled]) {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+:host(.outline) {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+:host(:hover:not([disabled])) {
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+:host(.selected:not([disabled])) {
+  background-color: rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+:host(:active:not([disabled]), .selected:active:not([disabled])) {
+  background-color: rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+:host(.core-dark-theme.outline) {
+  background-color: rgba(200, 200, 200, 0.05);
+  box-shadow: 0 0 0 1px rgba(200, 200, 200, 0.1);
+}
+
+:host(.core-dark-theme:hover) {
+  background-color: rgba(200, 200, 200, 0.05);
+  box-shadow: 0 1px 0 0 rgba(200, 200, 200, 0.12), 0 0 0 1px rgba(200, 200, 200, 0.1);
+}
+
+:host(.core-dark-theme.selected) {
+  background-color: rgba(220, 220, 220, 0.05);
+  box-shadow: inset 0 1px 0 0 rgba(200, 200, 200, 0.05), 0 0 0 1px rgba(200, 200, 200, 0.12);
+}
+
+:host(.core-dark-theme:active, .core-dark-theme.selected:active) {
+  background-color: rgba(200, 200, 200, 0.05);
+  box-shadow: inset 0 1px 0 0 rgba(200, 200, 200, 0.1), 0 0 0 1px rgba(200, 200, 200, 0.12);
+}
+
+core-icon {
+  pointer-events: none;
+}
+
+/* note: this is a polyfill aware selector */
+:host ::content > :not(core-icon) {
+  margin-left: 4px;
+}
+</style>
+    <core-icon src="{{src}}" icon="{{icon}}"></core-icon><content></content>
+  </template>
+
+  <script>
+
+    var p = {
+
+      /**
+       * The URL of an image for the icon.  Should not use `icon` property
+       * if you are using this property.
+       *
+       * @attribute src
+       * @type string
+       * @default ''
+       */
+      src: '',
+
+      /**
+       * If true, border is placed around the button to indicate it's
+       * active state.
+       *
+       * @attribute active
+       * @type boolean
+       * @default false
+       */
+      active: false,
+
+      /**
+       * Specifies the icon name or index in the set of icons available in
+       * the icon set.  Should not use `src` property if you are using this
+       * property.
+       *
+       * @attribute icon
+       * @type string
+       * @default ''
+       */
+      icon: '',
+
+      activeChanged: function() {
+        this.classList.toggle('selected', this.active);
+      }
+
+    };
+    
+    Polymer.mixin2(p, Polymer.CoreFocusable);
+    Polymer('core-icon-button', p);
+
+  </script>
+
+</polymer-element>
+
 <polymer-element name="core-list" tabindex="-1" assetpath="../components/core-list/">
 <template>
   <core-selection id="selection" multi="{{multi}}" on-core-select="{{selectedHandler}}"></core-selection>
@@ -5267,6 +5397,139 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
   })();
 </script>
 </polymer-element>
+<polymer-element name="paper-button" extends="paper-button-base" attributes="raised recenteringTouch fill" role="button" assetpath="../components/paper-button/">
+
+  <template>
+
+    <style>
+
+      :host {
+        display: inline-block;
+        position: relative;
+        box-sizing: border-box;
+        min-width: 5.14em;
+        margin: 0 0.29em;
+        background: transparent;
+        text-align: center;
+        font: inherit;
+        text-transform: uppercase;
+        outline: none;
+        border-radius: 3px;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: pointer;
+        z-index: 0;
+      }
+
+      :host([disabled]) {
+        background: #eaeaea;
+        color: #a8a8a8;
+        cursor: auto;
+        pointer-events: none;
+      }
+
+      ::content * {
+        text-transform: inherit;
+      }
+
+      #bg, #shadow {
+        border-radius: inherit;
+      }
+
+      #ripple {
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .button-content {
+        padding: 0.7em 0.57em
+      }
+
+      polyfill-next-selector { content: '.button-content > a'; }
+      ::content > a {
+        height: 100%;
+        padding: 0.7em 0.57em;
+        margin: -0.7em -0.57em;
+        /* flex */
+        -ms-flex: 1 1 0.000000001px;
+        -webkit-flex: 1;
+        flex: 1;
+        -webkit-flex-basis: 0.000000001px;
+        flex-basis: 0.000000001px;
+      }
+
+    </style>
+
+    <template if="{{raised}}">
+      <paper-shadow id="shadow" fit="" animated=""></paper-shadow>
+    </template>
+
+    <!-- this div is needed to position the ripple behind text content -->
+    <div class="button-content" relative="" layout="" horizontal="" center-center="">
+      <content></content>
+    </div>
+
+    <core-a11y-keys keys="space enter" target="{{}}" on-keys-pressed="{{_activate}}"></core-a11y-keys>
+
+  </template>
+
+  <script>
+    Polymer('paper-button',{
+
+      publish: {
+
+        /**
+         * If true, the button will be styled with a shadow.
+         *
+         * @attribute raised
+         * @type boolean
+         * @default false
+         */
+        raised: false,
+
+        /**
+         * By default the ripple emanates from where the user touched the button.
+         * Set this to true to always center the ripple.
+         *
+         * @attribute recenteringTouch
+         * @type boolean
+         * @default false
+         */
+        recenteringTouch: false,
+
+        /**
+         * By default the ripple expands to fill the button. Set this to true to
+         * constrain the ripple to a circle within the button.
+         *
+         * @attribute fill
+         * @type boolean
+         * @default true
+         */
+        fill: true
+
+      },
+
+      _activate: function() {
+        this.click();
+        this.fire('tap');
+        if (!this.pressed) {
+          var bcr = this.getBoundingClientRect();
+          var x = bcr.left + (bcr.width / 2);
+          var y = bcr.top + (bcr.height / 2);
+          this.downAction({x: x, y: y});
+          var fn = function fn() {
+            this.upAction();
+            this.removeEventListener('keyup', fn);
+          }.bind(this);
+          this.addEventListener('keyup', fn);
+        }
+      }
+
+    });
+  </script>
+</polymer-element>
 
 <polymer-element name="core-range" attributes="value min max step ratio" assetpath="../components/core-range/">
 <script>
@@ -6511,7 +6774,7 @@ polyfill-next-selector {
 </script>
 
 </polymer-element>
-<polymer-element name="rab-fast-scroll" extends="core-range" attributes="rotate snaps pin disabled secondaryProgress editable immediateValue dragging sectionValue target" role="scroll" tabindex="0" aria-valuemin="0" aria-valuemax="100" assetpath="components/rab-fast-scroll/">
+<polymer-element name="rab-fast-scroll" extends="core-range" attributes="rotate snaps pin disabled secondaryProgress editable immediateValue dragging sectionValue target" role="scroll" tabindex="0" aria-valuemin="0" aria-valuemax="100" assetpath="../app/components/rab-fast-scroll/">
 <template>
 
     <style>:host {
@@ -7082,358 +7345,7 @@ polyfill-next-selector {
 
 </script>
 </polymer-element>
-
-<polymer-element name="paper-button" extends="paper-button-base" attributes="raised recenteringTouch fill" role="button" assetpath="../components/paper-button/">
-
-  <template>
-
-    <style>
-
-      :host {
-        display: inline-block;
-        position: relative;
-        box-sizing: border-box;
-        min-width: 5.14em;
-        margin: 0 0.29em;
-        background: transparent;
-        text-align: center;
-        font: inherit;
-        text-transform: uppercase;
-        outline: none;
-        border-radius: 3px;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        -webkit-user-select: none;
-        user-select: none;
-        cursor: pointer;
-        z-index: 0;
-      }
-
-      :host([disabled]) {
-        background: #eaeaea;
-        color: #a8a8a8;
-        cursor: auto;
-        pointer-events: none;
-      }
-
-      ::content * {
-        text-transform: inherit;
-      }
-
-      #bg, #shadow {
-        border-radius: inherit;
-      }
-
-      #ripple {
-        pointer-events: none;
-        z-index: -1;
-      }
-
-      .button-content {
-        padding: 0.7em 0.57em
-      }
-
-      polyfill-next-selector { content: '.button-content > a'; }
-      ::content > a {
-        height: 100%;
-        padding: 0.7em 0.57em;
-        margin: -0.7em -0.57em;
-        /* flex */
-        -ms-flex: 1 1 0.000000001px;
-        -webkit-flex: 1;
-        flex: 1;
-        -webkit-flex-basis: 0.000000001px;
-        flex-basis: 0.000000001px;
-      }
-
-    </style>
-
-    <template if="{{raised}}">
-      <paper-shadow id="shadow" fit="" animated=""></paper-shadow>
-    </template>
-
-    <!-- this div is needed to position the ripple behind text content -->
-    <div class="button-content" relative="" layout="" horizontal="" center-center="">
-      <content></content>
-    </div>
-
-    <core-a11y-keys keys="space enter" target="{{}}" on-keys-pressed="{{_activate}}"></core-a11y-keys>
-
-  </template>
-
-  <script>
-    Polymer('paper-button',{
-
-      publish: {
-
-        /**
-         * If true, the button will be styled with a shadow.
-         *
-         * @attribute raised
-         * @type boolean
-         * @default false
-         */
-        raised: false,
-
-        /**
-         * By default the ripple emanates from where the user touched the button.
-         * Set this to true to always center the ripple.
-         *
-         * @attribute recenteringTouch
-         * @type boolean
-         * @default false
-         */
-        recenteringTouch: false,
-
-        /**
-         * By default the ripple expands to fill the button. Set this to true to
-         * constrain the ripple to a circle within the button.
-         *
-         * @attribute fill
-         * @type boolean
-         * @default true
-         */
-        fill: true
-
-      },
-
-      _activate: function() {
-        this.click();
-        this.fire('tap');
-        if (!this.pressed) {
-          var bcr = this.getBoundingClientRect();
-          var x = bcr.left + (bcr.width / 2);
-          var y = bcr.top + (bcr.height / 2);
-          this.downAction({x: x, y: y});
-          var fn = function fn() {
-            this.upAction();
-            this.removeEventListener('keyup', fn);
-          }.bind(this);
-          this.addEventListener('keyup', fn);
-        }
-      }
-
-    });
-  </script>
-</polymer-element>
-<polymer-element name="rab-fast-scroll" assetpath="components/rab-fast-scroll/">
-    <template>
-
-        <style>.wrapper {
-    height: 100%;
-    overflow: auto;
-}
-
-#scrollWindow {
-    height: 100%;
-    width: calc(100% + 30px);
-    background: #ffffff;
-    overflow: auto;
-    padding-bottom: 30px;
-}
-.divider, .item  {
-    text-align: center;
-    font-size: 30px;
-    color:#fff;
-    background: #651FFF;
-}
-.divider {
-    text-align: left;
-    padding-left: 10px;
-    font-size: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    width: 40px !important;
-    color: gray;
-    left: 0px;
-    opacity: 1;
-    background-color: transparent;
-    margin-left: 9px;
-    z-index: 999;
-    height: 1px;
-}
-.divider .letter {
-    transform: translateY(24px);
-}
-.item {
-    color: #000;
-    background: #fff;
-    font-size:14px;
-    padding-left: 60px;
-    padding-right: 50px;
-
-}
-
-/* button */
-paper-button {
-
-}
-
-.avatar {
-    background-color: #43A047;
-    width: 43px;
-    height: 43px;
-    border-radius: 50%;
-    line-height: 1.35;
-    color: #fff;
-    font-weight: 100;
-    font-size: 33px;
-}
-.avatar.blue {
-    background-color: #2196F3;
-}
-.avatar.pink {
-    background-color: #E91E63;
-}
-.avatar.purple {
-    background-color: #673AB7;
-}
-.avatar.red {
-    background-color: #F50057;
-}
-.avatar.img {
-    background: url("components/lalalal/img/_profile_small.jpg");
-}
-.avatar.img span {
-    display: none;
-}
-
-.name {
-    text-align: left;
-    padding-left: 20px;
-    text-transform: initial !important;
-}
-
-/* not active */
-rab-fast-scroll::shadow .ring > #sliderKnob > #sliderKnobInner {
-    background-color: #757575;
-    border-color: #757575;
-    width: 40px;
-    border-radius: 5px;
-    height: 3px;
-}
-rab-fast-scroll::shadow .ring.expand > #sliderKnob > #sliderKnobInner {
-    background-color: #0288D1;
-    border-color: #0288D1;
-}
-
-rab-fast-scroll::shadow .pin.ring > #sliderKnob > #sliderKnobInner::before {
-    background-color: #0288D1;
-}
-
-
-
-/* active */
-rab-fast-scroll::shadow #sliderBar::shadow #activeProgress {
-    background-color: #0288D1;
-}
-rab-fast-scroll::shadow #sliderKnobInner {
-    background-color: #0288D1;
-    border-color: #0288D1;
-    width: 40px;
-    border-radius: 5px;
-    height: 3px;
-}
-rab-fast-scroll::shadow #sliderKnobInner::before {
-    background-color: #0288D1;
-}
-rab-fast-scroll::shadow #sliderKnob > #sliderKnobInner::after {
-    color: #fff;
-}
-rab-fast-scroll::shadow #sliderBar::shadow #progressContainer {
-    display: none;
-}</style>
-
-        <rab-fast-scroll min="0" max="{{maxScroll}}" value="{{currentScroll}}" pin="true" on-immediate-value-change="{{scroll}}" rotate="true" dragging="{{dragging}}" sectionvalue="{{sectionValue}}" id="slider"></rab-fast-scroll>
-
-    </template>
-
-    <script>
-
-        Polymer('rab-fast-scroll', {
-
-            observe: {
-                // '$.scrollWindow._viewportSize': 'listReady', // Viewport ready
-                '$.slider.expand': 'scroll' // Scroll bar clicked
-            },
-            $list: function() {
-
-                return this.parentNode.querySelector('core-list');
-
-            },
-            ready: function () {
-
-                // create reference to scroll window with overflow-y
-                this.scrollWindow = this.$list();
-
-                // track scroll by swiping or mouse
-                this.scrollWindow.addEventListener("scroll", this.setScroll.bind(this), true);
-
-                // this.listReady();
-
-            },
-            listReady: function () {
-
-                // set rab-fast-scrolls maxScroll
-                this.maxScroll = this.scrollWindow.scrollHeight - this.scrollWindow.offsetHeight;
-
-                // set dividers from core-list
-                this.dividers = this.scrollWindow._physicalDividers;
-
-                // set rab-fast-scrolls same height as window
-                this.$.slider.shadowRoot.querySelector('#sliderContainer').style.width = (this.scrollWindow.offsetHeight - 60) + "px";
-
-            },
-            setScroll: function () {
-
-                // update rab-fast-scroll position
-                if (!this.dragging) this.currentScroll = this.scrollWindow.scrollTop;
-
-            },
-            scroll: function (e, detail, sender) {
-
-                var     dividers = this.dividers,
-                        scrollWindow = this.$list(),
-                        scrollBar = this.$.slider,
-                        scrollBarPosition = scrollBar._x ? scrollBar._x : this.$.slider.shadowRoot.querySelector('#sliderKnob').offsetLeft,
-                        scrollDirection = scrollBarPosition < this.lastScrollTop ? "up" : "down";
-
-                this.lastScrollTop = scrollBarPosition;
-
-                // set rab-fast-scroll bubble after passing divider in core-list
-                if(dividers) {
-
-                    for (var i = 0; i < dividers.length; ++i) {
-
-                        if (dividers[i].hidden) continue; // skip over hidden dividers
-
-                        var     divider = dividers[i],
-                                dividerTop = divider.getBoundingClientRect().top - (window.innerHeight - scrollWindow.offsetHeight), // take of header height
-                                dividerText = divider.innerText;
-//                        console.log(scrollBarPosition + " " + dividerTop)
-
-                        // no scroll, just click
-                        if (typeof scrollBarPosition === "undefined"  && scrollBarPosition >= dividerTop) this.sectionValue = dividerText;
-
-                        // scrolling down
-                        if (scrollDirection == "down" && scrollBarPosition >= dividerTop) this.sectionValue = dividerText
-
-                        // scrolling up
-                        if (scrollDirection == "up" && dividerTop <= scrollBarPosition) this.sectionValue = dividerText
-
-                    }
-
-                }
-
-                // set window after scrolling with rab-fast-scroll
-                if (this.dragging) scrollWindow.setScrollTop(scrollBar.immediateValue);
-
-            }
-
-        });
-
-    </script>
-</polymer-element><polymer-element name="contact-list" assetpath="">
+<polymer-element name="contact-list" assetpath="../app/">
 
     <template>
 
@@ -7541,7 +7453,7 @@ core-list {
     background-color: #F50057;
 }
 .avatar.img {
-    background: url("img/_profile_small.jpg");
+    background: url("../app/img/_profile_small.jpg");
 }
 .avatar.img span {
     display: none;
@@ -7594,7 +7506,7 @@ core-list {
         });
     </script>
 
-</polymer-element><polymer-element name="contact-app" assetpath="">
+</polymer-element><polymer-element name="contact-app" assetpath="../app/">
 
     <template>
 

@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         // grunt-watch will monitor the projects files
         watch: {
             all: {
-                files: 'index.html',
+                files: 'app/index.html',
                 options: {
                     livereload: false
                 }
@@ -30,9 +30,12 @@ module.exports = function(grunt) {
 
         // grunt-open will open your browser at the project's URL
         open: {
-            all: {
+            develop: {
                 // Gets the port from the connect configuration
-                path: 'http://localhost:<%= express.all.options.port%>/app'
+                path: 'http://localhost:<%= express.all.options.port%>/app/'
+            },
+            build: {
+                path: 'http://localhost:<%= express.all.options.port%>/build/'
             }
         },
 
@@ -41,7 +44,7 @@ module.exports = function(grunt) {
             default: {
                 options: {},
                 files: {
-                    'app/build.html': 'app/index.html'
+                    'build/index.html': 'app/index.html'
                 }
             }
         }
@@ -51,13 +54,16 @@ module.exports = function(grunt) {
     // Creates the `server` task
     grunt.registerTask('default', [
         'express',
-        'open',
+        'open:develop',
         'watch'
     ]);
 
     // Creates the `build` task
     grunt.registerTask('build', [
-        'vulcanize'
+        'vulcanize',
+        'express',
+        'open:build',
+        'watch'
     ]);
 
 };
