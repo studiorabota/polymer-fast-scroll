@@ -42,7 +42,11 @@ module.exports = function(grunt) {
         // build with vulcanize
         vulcanize: {
             default: {
-                options: {},
+                options: {
+                    inlineScripts: true,
+                    inlineCss: true,
+                    excludes: ['polymer.html']
+                },
                 files: {
                     'build/index.html': 'demo/index.html'
                 }

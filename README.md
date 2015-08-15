@@ -1,9 +1,9 @@
-#Polymer Fast Scroll
+# Polymer Fast Scroll
 > fast-scroll for a core-list component.
 
 #### What is a Fast Scroll
 
-See [demo](http:://www.studiorabota.com/polymer-contact-app.html).
+See [demo](http://studiorabota.com/labs/polymer-fast-scroll/build/).
 [Git repo](https://gitlab.com/studio.rabota/polymer-contact-app) of this demo.
 
 ## Getting started
