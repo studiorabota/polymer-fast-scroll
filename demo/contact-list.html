@@ -1,12 +1,12 @@
 <!-- Polymer Components -->
 <link rel="import"
-      href="../../../components/core-list/core-list.html">
+      href="../../core-list/core-list.html">
+<link rel="import"
+      href="../../paper-button/paper-button.html">
 
 <!-- Custom Components -->
 <link rel="import"
-      href="components/rab-scroll-bar/rab-scroll-bar.html">
-<link rel="import"
-      href="components/rab-fast-scroll/rab-fast-scroll.html">
+      href="../rab-fast-scroll.html">
 
 <polymer-element name="contact-list">
 
@@ -27,13 +27,16 @@
             </template>
         </core-list>
 
-        <rab-scroll-bar pin="true" target="{{[#scrollWindow}}"></rab-scroll-bar>
+        <rab-fast-scroll pin="true" target="{{scrollTarget}}"></rab-fast-scroll>
 
     </template>
 
     <script>
         Polymer('contact-list', {
 
+            ready: function() {
+                this.scrollTarget = '#scrollWindow';
+            },
             data: [
 
             [ { name: 'Aaren Lundberg', color:'blue' }, { name: 'Aarika Barbagallo', color:'img' }, { name: 'Abagael Fogarty' }, { name: 'Abbey Jelks', color:'pink' }, { name: 'Abra Bohannan' }, { name: 'Ada Tomson' }, { name: 'Adele Sober', color:'purple' }, { name: 'Adore Reeves' } ],

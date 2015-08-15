@@ -1,32 +1,33 @@
 {
-  "name": "polymer-tutorial",
-  "version": "0.5.4",
-  "homepage": "https://github.com/Polymer/polymer-tutorial",
-  "authors": [
-    "Arthur Evans <arthure@google.com>",
-    "Rob Dodson <robdodson@google.com>",
-    "Eric Bidelman <ericbidelman@google.com>"
-  ],
-  "description": "Polymer tutorial for read-only social network app",
-  "license": "MIT",
-  "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "core-icon-button": "Polymer/core-icon-button#^0.5.0",
-    "font-roboto": "Polymer/font-roboto#^0.5.0",
-    "core-header-panel": "Polymer/core-header-panel#^0.5.0",
-    "core-toolbar": "Polymer/core-toolbar#^0.5.0",
-    "paper-tabs": "Polymer/paper-tabs#^0.5.0",
-    "core-ajax": "Polymer/core-ajax#^0.5.0",
-    "paper-slider": "Polymer/paper-slider#~0.5.6",
-    "tk-vslider": "https://github.com/arunhedcet/tk-vslider.git#~0.5.5",
-    "core-list": "Polymer/core-list#~0.5.6"
-  }
+    "name": "rab-fast-scroll",
+    "dependencies": {
+        "font-roboto": "Polymer/font-roboto#^0.5",
+        "paper-input": "Polymer/paper-input#^0.5",
+        "paper-progress": "Polymer/paper-progress#^0.5",
+        "core-a11y-keys": "Polymer/core-a11y-keys#^0.5",
+        "core-list": "Polymer/core-list#^0.5"
+    },
+    "version": "0.5.5",
+    "homepage": "https://github.com/...",
+    "authors": [
+        "Vincent Kranendonk <kranendonk.vincent@gmail.com>"
+    ],
+    "description": "Polymer fast scroll",
+    "main": "rab-fast-scroll.html",
+    "keywords": [
+        "polymer",
+        "paper",
+        "slider",
+        "paper-slider",
+        "vertical",
+        "fast-scroll"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ]
 }
