@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         // grunt-watch will monitor the projects files
         watch: {
             all: {
-                files: 'app/index.html',
+                files: 'demo/index.html',
                 options: {
                     livereload: false
                 }
@@ -32,7 +32,7 @@ module.exports = function(grunt) {
         open: {
             develop: {
                 // Gets the port from the connect configuration
-                path: 'http://localhost:<%= express.all.options.port%>/app/'
+                path: 'http://localhost:<%= express.all.options.port%>/demo/'
             },
             build: {
                 path: 'http://localhost:<%= express.all.options.port%>/build/'
@@ -44,7 +44,7 @@ module.exports = function(grunt) {
             default: {
                 options: {},
                 files: {
-                    'build/index.html': 'app/index.html'
+                    'build/index.html': 'demo/index.html'
                 }
             }
         }
