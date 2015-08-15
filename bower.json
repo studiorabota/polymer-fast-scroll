@@ -1,0 +1,33 @@
+{
+    "name": "rab-fast-scroll",
+    "dependencies": {
+        "font-roboto": "Polymer/font-roboto#^0.5",
+        "paper-input": "Polymer/paper-input#^0.5",
+        "paper-progress": "Polymer/paper-progress#^0.5",
+        "core-a11y-keys": "Polymer/core-a11y-keys#^0.5",
+        "core-list": "Polymer/core-list#^0.5"
+    },
+    "version": "0.5.5",
+    "homepage": "https://github.com/...",
+    "authors": [
+        "Vincent Kranendonk <kranendonk.vincent@gmail.com>"
+    ],
+    "description": "Polymer fast scroll",
+    "main": "rab-fast-scroll.html",
+    "keywords": [
+        "polymer",
+        "paper",
+        "slider",
+        "paper-slider",
+        "vertical",
+        "fast-scroll"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ]
+}
