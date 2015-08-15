@@ -7,8 +7,8 @@
         "core-a11y-keys": "Polymer/core-a11y-keys#^0.5",
         "core-list": "Polymer/core-list#^0.5"
     },
-    "version": "0.5.5",
-    "homepage": "https://github.com/...",
+    "version": "1.0.0",
+    "homepage": "https://gitlab.com/studio.rabota/polymer-fast-scroll",
     "authors": [
         "Vincent Kranendonk <kranendonk.vincent@gmail.com>"
     ],
@@ -22,7 +22,6 @@
         "vertical",
         "fast-scroll"
     ],
-    "license": "MIT",
     "ignore": [
         "**/.*",
         "node_modules",
