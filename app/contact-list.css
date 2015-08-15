@@ -3,37 +3,37 @@
 */
 
 /* Color knob init state */
-rab-scroll-bar::shadow .ring > #scrollKnob > #scrollKnobInner {
+rab-fast-scroll::shadow .ring > #scrollKnob > #scrollKnobInner {
     /*background-color: #F44336;*/
 }
 
 /* Color knob after click */
-rab-scroll-bar::shadow .ring.expand > #scrollKnob > #scrollKnobInner {
+rab-fast-scroll::shadow .ring.expand > #scrollKnob > #scrollKnobInner {
     /*background-color: #E91E63;*/
 }
 
 /* Color balloon after click */
-rab-scroll-bar::shadow .pin.ring > #scrollKnob > #scrollKnobInner::before {
+rab-fast-scroll::shadow .pin.ring > #scrollKnob > #scrollKnobInner::before {
     /*background-color: #9C27B0;*/
 }
 
 /* Color knob when balloon expanded */
-rab-scroll-bar::shadow .pin.expand #scrollKnobInner {
+rab-fast-scroll::shadow .pin.expand #scrollKnobInner {
     /*background-color: #4CAF50;*/
 }
 
 /* Dragging: Color knob */
-rab-scroll-bar::shadow #scrollKnobInner {
+rab-fast-scroll::shadow #scrollKnobInner {
     /*background-color: #FF9800;*/
 }
 
 /* Dragging: Color balloon */
-rab-scroll-bar::shadow .pin > #scrollKnob > #scrollKnobInner::before {
+rab-fast-scroll::shadow .pin > #scrollKnob > #scrollKnobInner::before {
     /*background-color: #00BCD4;*/
 }
 
 /* Color text */
-rab-scroll-bar::shadow #scrollKnob > #scrollKnobInner::after {
+rab-fast-scroll::shadow #scrollKnob > #scrollKnobInner::after {
     color: white;
 }
 

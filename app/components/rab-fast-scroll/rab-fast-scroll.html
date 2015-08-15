@@ -1,108 +1,333 @@
-<link rel="import" href="../../../components/polymer/polymer.html">
-<link rel="import" href="../../../components/core-list/core-list.html">
-<link rel="import" href="../../../components/paper-button/paper-button.html">
+<link rel="import" href="../../../components/core-a11y-keys/core-a11y-keys.html">
+<link rel="import" href="../../../components/paper-progress/paper-progress.html">
+<link rel="import" href="../../../components/paper-input/paper-input.html">
 
+<polymer-element name="rab-fast-scroll" extends="core-range"
+                 attributes="rotate snaps pin disabled secondaryProgress editable immediateValue dragging sectionValue target"
+                 role="scroll" tabindex="0" aria-valuemin="0" aria-valuemax="100">
+<template>
 
-<polymer-element name="rab-fast-scroll">
-    <template>
+    <link rel="stylesheet" href="rab-fast-scroll.css">
 
-        <link rel="stylesheet" href="rab-fast-scroll.css">
-
-        <rab-scroll-bar min="0"
-                     max="{{maxScroll}}"
-                     value="{{currentScroll}}"
-                     pin="true"
-                     on-immediate-value-change="{{scroll}}"
-                     rotate="true"
-                     dragging="{{dragging}}"
-                     sectionValue="{{sectionValue}}"
-                     id="slider"></rab-scroll-bar>
-
+    <template if="{{!disabled}}">
+        <core-a11y-keys target="{{}}" keys="left down pagedown home"
+                        on-keys-pressed="{{decrementKey}}"></core-a11y-keys>
+        <core-a11y-keys target="{{}}" keys="right up pageup end" on-keys-pressed="{{incrementKey}}"></core-a11y-keys>
     </template>
 
-    <script>
+    <div id="scrollContainer"
+         class="{{ {disabled: disabled, pin: pin, snaps: snaps, ring: immediateValue <= min, expand: expand, dragging: dragging, transiting: transiting, editable: editable , rotate:rotate, target:target} | tokenList }}">
 
-        Polymer('rab-fast-scroll', {
+        <div class="bar-container">
+            <paper-progress id="scrollBar" aria-hidden="true" min="{{min}}" max="{{max}}" value="{{immediateValue}}"
+                            secondaryProgress="{{secondaryProgress}}"
+                            on-down="{{bardown}}" on-up="{{resetKnob}}"
+                            on-trackstart="{{trackStart}}" on-trackx="{{track}}"
+                            on-trackend="{{trackEnd}}"></paper-progress>
+        </div>
 
-            observe: {
-                // '$.scrollWindow._viewportSize': 'listReady', // Viewport ready
-                '$.slider.expand': 'scroll' // Scroll bar clicked
-            },
-            $list: function() {
+        <template if="{{snaps && !disabled}}">
+            <div class="scroll-markers" horizontal layout>
+                <template repeat="{{markers}}">
+                    <div flex class="scroll-marker"></div>
+                </template>
+            </div>
+        </template>
 
-                return this.parentNode.querySelector('core-list');
+        <div id="scrollKnob" on-down="{{knobdown}}" on-up="{{resetKnob}}"
+             on-trackstart="{{trackStart}}" on-track="{{track}}" on-trackend="{{trackEnd}}"
+             on-transitionend="{{knobTransitionEnd}}"
+             center-justified center horizontal layout>
 
-            },
-            ready: function () {
+            <div id="scrollKnobInner" value="{{sectionValue}}"></div>
 
-                // create reference to scroll window with overflow-y
-                this.scrollWindow = this.$list();
+        </div>
 
-                // track scroll by swiping or mouse
-                this.scrollWindow.addEventListener("scroll", this.setScroll.bind(this), true);
+    </div>
 
-                // this.listReady();
+    <template if="{{editable}}">
+        <paper-input id="input" class="scroll-input" value="{{immediateValue}}" disabled?="{{disabled}}"
+                     on-change="{{inputChange}}"></paper-input>
+    </template>
 
-            },
-            listReady: function () {
+</template>
+<script>
 
-                // set rab-scroll-bars maxScroll
-                this.maxScroll = this.scrollWindow.scrollHeight - this.scrollWindow.offsetHeight;
+    Polymer('rab-fast-scroll', {
 
-                // set dividers from core-list
-                this.dividers = this.scrollWindow._physicalDividers;
+        snaps: false,
 
-                // set rab-scroll-bars same height as window
-                this.$.slider.shadowRoot.querySelector('#sliderContainer').style.width = (this.scrollWindow.offsetHeight - 60) + "px";
+        pin: false,
 
-            },
-            setScroll: function () {
+        disabled: false,
 
-                // update rab-scroll-bar position
-                if (!this.dragging) this.currentScroll = this.scrollWindow.scrollTop;
+        secondaryProgress: 0,
 
-            },
-            scroll: function (e, detail, sender) {
+        editable: false,
 
-                var     dividers = this.dividers,
-                        scrollWindow = this.$list(),
-                        scrollBar = this.$.slider,
-                        scrollBarPosition = scrollBar._x ? scrollBar._x : this.$.slider.shadowRoot.querySelector('#sliderKnob').offsetLeft,
-                        scrollDirection = scrollBarPosition < this.lastScrollTop ? "up" : "down";
+        maxMarkers: 100,
 
-                this.lastScrollTop = scrollBarPosition;
+        dragging: false,
 
-                // set rab-scroll-bar bubble after passing divider in core-list
-                if(dividers) {
+        rotate: true,
 
-                    for (var i = 0; i < dividers.length; ++i) {
+        scrollWindowHeight: 0,
 
-                        if (dividers[i].hidden) continue; // skip over hidden dividers
+        observe: {
+            'step snaps': 'update'
+        },
 
-                        var     divider = dividers[i],
-                                dividerTop = divider.getBoundingClientRect().top - (window.innerHeight - scrollWindow.offsetHeight), // take of header height
-                                dividerText = divider.innerText;
-//                        console.log(scrollBarPosition + " " + dividerTop)
+        targetReference: function(target) {
 
-                        // no scroll, just click
-                        if (typeof scrollBarPosition === "undefined"  && scrollBarPosition >= dividerTop) this.sectionValue = dividerText;
+            return this.parentNode.querySelector(target);
 
-                        // scrolling down
-                        if (scrollDirection == "down" && scrollBarPosition >= dividerTop) this.sectionValue = dividerText
+        },
 
-                        // scrolling up
-                        if (scrollDirection == "up" && dividerTop <= scrollBarPosition) this.sectionValue = dividerText
+        ready: function () {
 
-                    }
+            // init scrollbar
+            this.update();
+
+        },
+
+        targetChanged: function(oldTarget, newTarget) {
+
+            // set reference to scroll window
+            this.scrollWindow = this.targetReference(newTarget);
+
+            // track scroll event
+            this.scrollWindow.addEventListener("scroll", this.setScroll.bind(this), true);
+
+            // init scrollbar
+            this.updateScollBarSize();
+
+        },
+
+        checkScrollWindowHeight: function() {
+
+            // compare height with _viewportSize of core-list
+            if(this.scrollWindowHeight != this.scrollWindow._viewportSize) {
+                this.scrollWindowHeight = this.scrollWindow._viewportSize;
+                this.updateScollBarSize();
+            }
+
+        },
+
+        updateScollBarSize: function () {
+
+            // set rab-fast-scrolls maxScroll
+            this.max = this.scrollWindow.scrollHeight - this.scrollWindow.offsetHeight;
+
+            // set dividers from core-list
+            this.dividers = this.scrollWindow._physicalDividers;
+
+            // set rab-fast-scrolls same height as window
+            this.shadowRoot.querySelector('#scrollContainer').style.width = (this.scrollWindow.offsetHeight - 60) + "px";
+
+        },
+
+        setScroll: function () {
+
+            // update rab-fast-scroll position
+            if (!this.dragging) this.value = this.scrollWindow.scrollTop;
+
+        },
+
+        scroll: function () {
+
+            this.checkScrollWindowHeight();
+
+            var     dividers = this.dividers,
+                    scrollWindow = this.targetReference(this.target),
+                    scrollBar = this,
+                    scrollBarPosition = scrollBar._x ? scrollBar._x : scrollBar.shadowRoot.querySelector('#scrollKnob').offsetLeft,
+                    scrollDirection = scrollBarPosition < this.lastScrollTop ? "up" : "down";
+
+            this.lastScrollTop = scrollBarPosition;
+
+            // set rab-fast-scroll bubble after passing divider in core-list
+            if(dividers) {
+
+                for (var i = 0; i < dividers.length; ++i) {
+
+                    if (dividers[i].hidden) continue; // skip over hidden dividers
+
+                    var     divider = dividers[i],
+                            dividerTop = divider.getBoundingClientRect().top - (window.innerHeight - scrollWindow.offsetHeight), // take of header height
+                            dividerText = divider.innerText;
+
+                    // no scroll, just click
+                    if (typeof scrollBarPosition === "undefined"  && scrollBarPosition >= dividerTop) this.sectionValue = dividerText;
+
+                    // scrolling down
+                    if (scrollDirection == "down" && scrollBarPosition >= dividerTop) this.sectionValue = dividerText
+
+                    // scrolling up
+                    if (scrollDirection == "up" && dividerTop <= scrollBarPosition) this.sectionValue = dividerText
 
                 }
 
-                // set window after scrolling with rab-scroll-bar
-                if (this.dragging) scrollWindow.setScrollTop(scrollBar.immediateValue);
-
             }
 
-        });
+            // set window after scrolling with rab-fast-scroll
+            if (this.dragging) scrollWindow.setScrollTop(scrollBar.immediateValue);
 
-    </script>
+        },
+
+        update: function () {
+            this.positionKnob(this.calcRatio(this.value));
+            this.updateMarkers();
+        },
+
+        minChanged: function () {
+            this.update();
+            this.setAttribute('aria-valuemin', this.min);
+        },
+
+        maxChanged: function () {
+            this.update();
+            this.setAttribute('aria-valuemax', this.max);
+        },
+
+        valueChanged: function () {
+            this.update();
+            this.setAttribute('aria-valuenow', this.value);
+            this.fire('core-change');
+        },
+
+        disabledChanged: function () {
+            if (this.disabled) {
+                this.removeAttribute('tabindex');
+            } else {
+                this.tabIndex = 0;
+            }
+        },
+
+        immediateValueChanged: function () {
+            if (!this.dragging) {
+                this.value = this.immediateValue;
+            }
+            this.scroll();
+            this.fire('immediate-value-change');
+        },
+
+        expandKnob: function () {
+            this.expand = true;
+            this.scroll();
+        },
+
+        resetKnob: function () {
+            this.expandJob && this.expandJob.stop();
+            this.expand = false;
+        },
+
+        positionKnob: function (ratio) {
+            this.immediateValue = this.calcStep(this.calcKnobPosition(ratio)) || 0;
+            this._ratio = this.snaps ? this.calcRatio(this.immediateValue) : ratio;
+            this.$.scrollKnob.style.left = this._ratio * 100 + '%';
+        },
+
+        inputChange: function () {
+            this.value = this.$.input.value;
+            this.fire('change');
+        },
+
+        calcKnobPosition: function (ratio) {
+            return (this.max - this.min) * ratio + this.min;
+        },
+
+        trackStart: function (e) {
+            this._w = this.$.scrollBar.offsetWidth;
+            this._x = this._ratio * this._w;
+            this._startx = this._x || 0;
+            this._minx = -this._startx;
+            this._maxx = this._w - this._startx;
+            this.$.scrollKnob.classList.add('dragging');
+            this.dragging = true;
+            e.preventTap();
+        },
+
+        track: function (e) {
+            var dx = this.rotate ? e.dy : e.dx;
+            var x = Math.min(this._maxx, Math.max(this._minx, dx));
+            this._x = this._startx + x;
+            this.immediateValue = this.calcStep(
+                    this.calcKnobPosition(this._x / this._w)) || 0;
+            var s = this.$.scrollKnob.style;
+            s.transform = s.webkitTransform = 'translate3d(' + (this.snaps ?
+            (this.calcRatio(this.immediateValue) * this._w) - this._startx : x) + 'px, 0, 0)';
+        },
+
+        trackEnd: function () {
+            var s = this.$.scrollKnob.style;
+            s.transform = s.webkitTransform = '';
+            this.$.scrollKnob.classList.remove('dragging');
+            this.dragging = false;
+            this.resetKnob();
+            this.value = this.immediateValue;
+            this.fire('change');
+        },
+
+        knobdown: function (e) {
+            e.preventDefault();
+            this.expandKnob();
+        },
+
+        bardown: function (e) {
+            e.preventDefault();
+            this.transiting = true;
+            this._w = this.$.scrollBar.offsetWidth;
+            var rect = this.$.scrollBar.getBoundingClientRect();
+            var ratio = (e.x - rect.left) / this._w;
+            this.positionKnob(ratio);
+            this.expandJob = this.job(this.expandJob, this.expandKnob, 60);
+            this.asyncFire('change');
+        },
+
+        knobTransitionEnd: function (e) {
+            if (e.target === this.$.scrollKnob) {
+                this.transiting = false;
+            }
+        },
+
+        updateMarkers: function () {
+            this.markers = [];
+            var l = (this.max - this.min) / this.step;
+            if (!this.snaps && l > this.maxMarkers) {
+                return;
+            }
+            for (var i = 0; i < l; i++) {
+                this.markers.push('');
+            }
+        },
+
+        increment: function () {
+            this.value = this.clampValue(this.value + this.step);
+        },
+
+        decrement: function () {
+            this.value = this.clampValue(this.value - this.step);
+        },
+
+        incrementKey: function (ev, keys) {
+            if (keys.key === "end") {
+                this.value = this.max;
+            } else {
+                this.increment();
+            }
+            this.fire('change');
+        },
+
+        decrementKey: function (ev, keys) {
+            if (keys.key === "home") {
+                this.value = this.min;
+            } else {
+                this.decrement();
+            }
+            this.fire('change');
+        }
+
+    });
+
+</script>
 </polymer-element>
