@@ -20,7 +20,7 @@ bower update
 
 #### Implementing the component
 
-Check contact-list.html in the demo for a complete implementation.
+Check contact-list.html in the demo folder for a complete example.
 
 ```html
 <core-list data="{{data}}" groups="{{groups}}" id="scrollWindow" runwayFactor="2000"></core-list>
@@ -40,11 +40,3 @@ npm install
 grunt
 grunt build
 ```
-
-## Open issues
-- Actual faster scroll
-- On load scrollbar does not scroll with normal scroll
-- React to resize window
-- Make setting Runway factor to high not necessary
-- When first window scroll and then scrollbar scroll - first white
-
