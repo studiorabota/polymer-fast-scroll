@@ -163,6 +163,15 @@
 
             this.lastScrollTop = scrollBarPosition;
 
+            // keep balloon fixed to the top
+            if(scrollBarPosition < 40) {
+                scrollBar.shadowRoot.querySelector('#scrollKnob').classList.add('fix-balloon');
+                console.log('add');
+            } else {
+                scrollBar.shadowRoot.querySelector('#scrollKnob').classList.remove('fix-balloon');
+                console.log('remove');
+            }
+
             // set rab-fast-scroll bubble after passing divider in core-list
             if(dividers) {
 
