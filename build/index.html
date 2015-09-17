@@ -360,7 +360,7 @@ html /deep/ core-icon {
   need to be notified when they are resized or un-hidden by their parents in order to take
   action on their new measurements).
 
-  Elements that perform measurement should add the `Core.Resizable` mixin to their 
+  Elements that perform measurement should add the `Core.Resizable` mixin to their
   Polymer prototype definition and listen for the `core-resize` event on themselves.
   This event will be fired when they become showing after having been hidden,
   when they are resized explicitly by a `CoreResizer`, or when the window has been resized.
@@ -424,7 +424,7 @@ html /deep/ core-icon {
   action on their new measurements).
 
   Elements that cause their children to be resized (e.g. a splitter control) or hide/show
-  their children (e.g. overlay) should add the `Core.CoreResizer` mixin to their 
+  their children (e.g. overlay) should add the `Core.CoreResizer` mixin to their
   Polymer prototype definition and then call `this.notifyResize()` any time the element
   resizes or un-hides its children.
 
@@ -525,8 +525,8 @@ html /deep/ core-icon {
     // Private: Handle requests for resize
     _handleResizeRequested: function(e) {
       var target = e.path[0];
-      if ((target == this) || 
-          (target == this._resizerListener) || 
+      if ((target == this) ||
+          (target == this._resizerListener) ||
           (this._resizerPeers && this._resizerPeers.indexOf(target) < 0)) {
         return;
       }
@@ -801,8 +801,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   display: none;
 }
 
-/* 
-mode: scroll 
+/*
+mode: scroll
 */
 :host([mode=scroll]) #mainContainer {
   overflow: visible;
@@ -877,7 +877,7 @@ mode: cover
     publish: {
       /**
        * Controls header and scrolling behavior. Options are
-       * `standard`, `seamed`, `waterfall`, `waterfall-tall`, `scroll` and 
+       * `standard`, `seamed`, `waterfall`, `waterfall-tall`, `scroll` and
        * `cover`. Default is `standard`.
        *
        * `standard`: The header is a step above the panel. The header will consume the
@@ -949,20 +949,20 @@ mode: cover
       tallMode: {'waterfall-tall': 1},
       outerScroll: {'scroll': 1}
     },
-    
+
     ready: function() {
       this.scrollHandler = this.scroll.bind(this);
       this.addListener();
     },
-    
+
     detached: function() {
       this.removeListener(this.mode);
     },
-    
+
     addListener: function() {
       this.scroller.addEventListener('scroll', this.scrollHandler);
     },
-    
+
     removeListener: function(mode) {
       var s = this.getScrollerForMode(mode);
       s.removeEventListener('scroll', this.scrollHandler);
@@ -997,7 +997,7 @@ mode: cover
     get header() {
       return this.$.headerContent.getDistributedNodes()[0];
     },
-    
+
     getScrollerForMode: function(mode) {
       return this.modeConfigs.outerScroll[mode] ?
           this.$.outerContainer : this.$.mainContainer;
@@ -1178,7 +1178,7 @@ polyfill-next-selector { content: ':host .indent'; }
 (function() {
 
   Polymer('core-toolbar', {
-    
+
     /**
      * Controls how the items are aligned horizontally.
      * Options are `start`, `center`, `end`, `between` and `around`.
@@ -1188,7 +1188,7 @@ polyfill-next-selector { content: ':host .indent'; }
      * @default ''
      */
     justify: '',
-    
+
     /**
      * Controls how the items are aligned horizontally when they are placed
      * in the middle.
@@ -1199,7 +1199,7 @@ polyfill-next-selector { content: ':host .indent'; }
      * @default ''
      */
     middleJustify: '',
-    
+
     /**
      * Controls how the items are aligned horizontally when they are placed
      * at the bottom.
@@ -1210,19 +1210,19 @@ polyfill-next-selector { content: ':host .indent'; }
      * @default ''
      */
     bottomJustify: '',
-    
+
     justifyChanged: function(old) {
       this.updateBarJustify(this.$.topBar, this.justify, old);
     },
-    
+
     middleJustifyChanged: function(old) {
       this.updateBarJustify(this.$.middleBar, this.middleJustify, old);
     },
-    
+
     bottomJustifyChanged: function(old) {
       this.updateBarJustify(this.$.bottomBar, this.bottomJustify, old);
     },
-    
+
     updateBarJustify: function(bar, justify, old) {
       if (old) {
         bar.removeAttribute(this.toLayoutAttrName(old));
@@ -1231,11 +1231,11 @@ polyfill-next-selector { content: ':host .indent'; }
         bar.setAttribute(this.toLayoutAttrName(justify), '');
       }
     },
-    
+
     toLayoutAttrName: function(value) {
       return value === 'between' ? 'justified' : value + '-justified';
     }
-    
+
   });
 
 })();
@@ -1264,7 +1264,7 @@ polyfill-next-selector { content: ':host .indent'; }
        * Retrieves the selected item(s).
        * @method getSelection
        * @returns Returns the selected item(s). If the multi property is true,
-       * getSelection will return an array, otherwise it will return 
+       * getSelection will return an array, otherwise it will return
        * the selected item or undefined if there is no selection.
       */
       getSelection: function() {
@@ -1804,28 +1804,28 @@ polyfill-next-selector { content: ':host .indent'; }
 <script>
 
   (function() {
-    
+
     var SKIP_ID = 'meta';
     var metaData = {}, metaArray = {};
 
     Polymer('core-meta', {
-      
+
       /**
        * The type of meta-data.  All meta-data with the same type with be
        * stored together.
-       * 
+       *
        * @attribute type
        * @type string
        * @default 'default'
        */
       type: 'default',
-      
+
       alwaysPrepare: true,
-      
+
       ready: function() {
         this.register(this.id);
       },
-      
+
       get metaArray() {
         var t = this.type;
         if (!metaArray[t]) {
@@ -1833,7 +1833,7 @@ polyfill-next-selector { content: ':host .indent'; }
         }
         return metaArray[t];
       },
-      
+
       get metaData() {
         var t = this.type;
         if (!metaData[t]) {
@@ -1841,7 +1841,7 @@ polyfill-next-selector { content: ':host .indent'; }
         }
         return metaData[t];
       },
-      
+
       register: function(id, old) {
         if (id && id !== SKIP_ID) {
           this.unregister(this, old);
@@ -1849,7 +1849,7 @@ polyfill-next-selector { content: ':host .indent'; }
           this.metaArray.push(this);
         }
       },
-      
+
       unregister: function(meta, id) {
         delete this.metaData[id || meta.id];
         var i = this.metaArray.indexOf(meta);
@@ -1857,10 +1857,10 @@ polyfill-next-selector { content: ':host .indent'; }
           this.metaArray.splice(i, 1);
         }
       },
-      
+
       /**
        * Returns a list of all meta-data elements with the same type.
-       * 
+       *
        * @property list
        * @type array
        * @default []
@@ -1868,7 +1868,7 @@ polyfill-next-selector { content: ':host .indent'; }
       get list() {
         return this.metaArray;
       },
-      
+
       /**
        * Retrieves meta-data by ID.
        *
@@ -1879,19 +1879,19 @@ polyfill-next-selector { content: ':host .indent'; }
       byId: function(id) {
         return this.metaData[id];
       }
-      
+
     });
-    
+
   })();
-  
+
 </script>
 </polymer-element>
 <polymer-element name="core-iconset" extends="core-meta" attributes="src width icons iconSize" assetpath="../components/core-iconset/">
-  
+
   <script>
-  
+
     Polymer('core-iconset', {
-  
+
       /**
        * The URL of the iconset image.
        *
@@ -1958,7 +1958,7 @@ polyfill-next-selector { content: ':host .indent'; }
         this.iconNames = [];
         this.themes = {};
       },
-  
+
       ready: function() {
         // TODO(sorvell): ensure iconset's src is always relative to the main
         // document
@@ -2009,7 +2009,7 @@ polyfill-next-selector { content: ':host .indent'; }
        * @param {String|Number} icon The name of the icon or the index of the
        * icon within in the icon image.
        * @param {String} theme The name of the theme.
-       * @returns {Object} An object specifying the offset of the given icon 
+       * @returns {Object} An object specifying the offset of the given icon
        * within the icon resource file; `offsetX` is the horizontal offset and
        * `offsetY` is the vertical offset. Both values are in pixel units.
        */
@@ -2031,14 +2031,14 @@ polyfill-next-selector { content: ':host .indent'; }
 
       /**
        * Applies an icon to the given element as a css background image. This
-       * method does not size the element, and it's often necessary to set 
+       * method does not size the element, and it's often necessary to set
        * the element's height and width so that the background image is visible.
        *
        * @method applyIcon
        * @param {Element} element The element to which the background is
        * applied.
        * @param {String|Number} icon The name or index of the icon to apply.
-       * @param {Number} scale (optional, defaults to 1) A scaling factor 
+       * @param {Number} scale (optional, defaults to 1) A scaling factor
        * with which the icon can be magnified.
        * @return {Element} The icon element.
        */
@@ -2049,7 +2049,7 @@ polyfill-next-selector { content: ':host .indent'; }
           var icon = element._icon || document.createElement('div');
           var style = icon.style;
           style.backgroundImage = 'url(' + this.src + ')';
-          style.backgroundPosition = (-offset.offsetX * scale + 'px') + 
+          style.backgroundPosition = (-offset.offsetX * scale + 'px') +
              ' ' + (-offset.offsetY * scale + 'px');
           style.backgroundSize = scale === 1 ? 'auto' :
              this.width * scale + 'px';
@@ -2068,10 +2068,10 @@ polyfill-next-selector { content: ':host .indent'; }
 <polymer-element name="core-icon" attributes="src icon alt" assetpath="../components/core-icon/">
 <script>
 (function() {
-  
+
   // mono-state
   var meta;
-  
+
   Polymer('core-icon', {
 
     /**
@@ -2100,7 +2100,7 @@ polyfill-next-selector { content: ':host .indent'; }
      * If alt is present and not empty, it will set the element's role to img and add an aria-label whose content matches alt.
      * If alt is present and is an empty string, '', it will hide the element from the accessibility layer
      * If alt is not present, it will set the element's role to img and the element will fallback to using the icon attribute for its aria-label.
-     * 
+     *
      * @attribute alt
      * @type string
      * @default ''
@@ -2201,7 +2201,7 @@ polyfill-next-selector { content: ':host .indent'; }
     }
 
   });
-  
+
 })();
 </script>
 
@@ -2295,15 +2295,15 @@ polyfill-next-selector { content: ':host .indent'; }
         root.insertBefore(svg, root.firstElementChild);
         return svg;
       },
-      
+
       /**
        * Tell users of the iconset, that the set has loaded.
-       * This finds all elements matching the selector argument and calls 
+       * This finds all elements matching the selector argument and calls
        * the method argument on them.
        * @method updateIcons
-       * @param selector {string} css selector to identify iconset users, 
+       * @param selector {string} css selector to identify iconset users,
        * defaults to '[icon]'
-       * @param method {string} method to call on found elements, 
+       * @param method {string} method to call on found elements,
        * defaults to 'updateIcon'
        */
       updateIcons: function(selector, method) {
@@ -2317,7 +2317,7 @@ polyfill-next-selector { content: ':host .indent'; }
           }
         }
       }
-      
+
 
     });
 
@@ -3265,15 +3265,15 @@ polyfill-next-selector { content: '.tab-content > a'; }
   flex-basis: 0.000000001px;
 }
 </style>
-  
+
   <div class="tab-content" flex="" auto="" center-center="" horizontal="" layout=""><content></content></div>
   <paper-ripple id="ink" initialopacity="0.95" opacitydecayvelocity="0.98"></paper-ripple>
-  
+
 </template>
 <script>
 
   Polymer('paper-tab', {
-    
+
     /**
      * If true, ink ripple effect is disabled.
      *
@@ -3282,7 +3282,7 @@ polyfill-next-selector { content: '.tab-content > a'; }
      * @default false
      */
     noink: false,
-    
+
     eventDelegates: {
       down: 'downAction',
       up: 'upAction'
@@ -3298,13 +3298,13 @@ polyfill-next-selector { content: '.tab-content > a'; }
     upAction: function() {
       this.$.ink.upAction();
     },
-    
+
     cancelRipple: function() {
       this.$.ink.upAction();
     }
-    
+
   });
-  
+
 </script>
 </polymer-element>
 <polymer-element name="paper-tabs" extends="core-selector" attributes="noink nobar noslide scrollable hideScrollButton alignBottom" role="tablist" horizontal="" center="" layout="" assetpath="../components/paper-tabs/">
@@ -3391,29 +3391,29 @@ polyfill-next-selector { content: '#tabsContent > *:not(#selectionBar)'; }
   height: 100%;
 }
 </style>
-  
+
   <div class="scroll-button" hidden?="{{!scrollable || hideScrollButton}}">
     <paper-icon-button icon="chevron-left" class="{{ {hidden: leftHidden} | tokenList }}" on-down="{{holdLeft}}" on-up="{{releaseHold}}"></paper-icon-button>
   </div>
-  
+
   <div id="tabsContainer" class="{{ {scrollable: scrollable} | tokenList }}" flex="" on-scroll="{{scroll}}" on-trackstart="{{trackStart}}">
-  
+
     <div id="tabsContent" horizontal="" layout?="{{!scrollable}}">
       <shadow></shadow>
       <div id="selectionBar" hidden?="{{nobar}}" class="{{ {alignBottom: alignBottom} | tokenList }}" on-transitionend="{{barTransitionEnd}}"></div>
     </div>
-    
+
   </div>
-  
+
   <div class="scroll-button" hidden?="{{!scrollable || hideScrollButton}}">
     <paper-icon-button icon="chevron-right" class="{{ {hidden: rightHidden} | tokenList }}" on-down="{{holdRight}}" on-up="{{releaseHold}}"></paper-icon-button>
   </div>
-    
+
 </template>
 <script>
 
   Polymer('paper-tabs',Polymer.mixin({
-    
+
     /**
      * If true, ink ripple effect is disabled.
      *
@@ -3422,7 +3422,7 @@ polyfill-next-selector { content: '#tabsContent > *:not(#selectionBar)'; }
      * @default false
      */
     noink: false,
-    
+
     /**
      * If true, the bottom bar to indicate the selected tab will not be shown.
      *
@@ -3431,7 +3431,7 @@ polyfill-next-selector { content: '#tabsContent > *:not(#selectionBar)'; }
      * @default false
      */
     nobar: false,
-    
+
     /**
      * If true, the slide effect for the bottom bar is disabled.
      *
@@ -3440,7 +3440,7 @@ polyfill-next-selector { content: '#tabsContent > *:not(#selectionBar)'; }
      * @default false
      */
     noslide: false,
-    
+
     /**
      * If true, tabs are scrollable and the tab width is based on the label width.
      *
@@ -3449,7 +3449,7 @@ polyfill-next-selector { content: '#tabsContent > *:not(#selectionBar)'; }
      * @default false
      */
     scrollable: false,
-    
+
     /**
      * If true, dragging on the tabs to scroll is disabled.
      *
@@ -3458,7 +3458,7 @@ polyfill-next-selector { content: '#tabsContent > *:not(#selectionBar)'; }
      * @default false
      */
     disableDrag: false,
-    
+
     /**
      * If true, scroll buttons (left/right arrow) will be hidden for scrollable tabs.
      *
@@ -3467,7 +3467,7 @@ polyfill-next-selector { content: '#tabsContent > *:not(#selectionBar)'; }
      * @default false
      */
     hideScrollButton: false,
-    
+
     /**
      * If true, the tabs are aligned to bottom (the selection bar appears at the top).
      *
@@ -3480,20 +3480,20 @@ polyfill-next-selector { content: '#tabsContent > *:not(#selectionBar)'; }
     eventDelegates: {
       'core-resize': 'resizeHandler'
     },
-    
+
     activateEvent: 'tap',
-    
+
     step: 10,
-    
+
     holdDelay: 10,
-    
+
     ready: function() {
       this.super();
       this._trackxHandler = this.trackx.bind(this);
       Polymer.addEventListener(this.$.tabsContainer, 'trackx', this._trackxHandler);
       this._tabsObserver = new MutationObserver(this.updateBar.bind(this));
     },
-    
+
     domReady: function() {
       this.async('resizeHandler');
       this._tabsObserver.observe(this, {childList: true, subtree: true, characterData: true});
@@ -3502,13 +3502,13 @@ polyfill-next-selector { content: '#tabsContent > *:not(#selectionBar)'; }
     attached: function() {
       this.resizableAttachedHandler();
     },
-    
+
     detached: function() {
       Polymer.removeEventListener(this.$.tabsContainer, 'trackx', this._trackxHandler);
       this._tabsObserver.disconnect();
       this.resizableDetachedHandler();
     },
-    
+
     trackStart: function(e) {
       if (!this.scrollable || this.disableDrag) {
         return;
@@ -3520,19 +3520,19 @@ polyfill-next-selector { content: '#tabsContent > *:not(#selectionBar)'; }
       this._startx = this.$.tabsContainer.scrollLeft;
       e.preventTap();
     },
-    
+
     trackx: function(e) {
       if (!this.scrollable || this.disableDrag) {
         return;
       }
       this.$.tabsContainer.scrollLeft = this._startx - e.dx;
     },
-    
+
     resizeHandler: function() {
       this.scroll();
       this.updateBar();
     },
-    
+
     scroll: function() {
       if (!this.scrollable) {
         return;
@@ -3542,28 +3542,28 @@ polyfill-next-selector { content: '#tabsContent > *:not(#selectionBar)'; }
       this.leftHidden = l === 0;
       this.rightHidden = l === Math.max(0, (tc.scrollWidth - tc.clientWidth));
     },
-    
+
     holdLeft: function() {
       this.holdJob = setInterval(this.scrollToLeft.bind(this), this.holdDelay);
     },
-    
+
     holdRight: function() {
       this.holdJob = setInterval(this.scrollToRight.bind(this), this.holdDelay);
     },
-    
+
     releaseHold: function() {
       clearInterval(this.holdJob);
       this.holdJob = null;
     },
-    
+
     scrollToLeft: function() {
       this.$.tabsContainer.scrollLeft -= this.step;
     },
-    
+
     scrollToRight: function() {
       this.$.tabsContainer.scrollLeft += this.step;
     },
-    
+
     /**
      * Invoke this to update the size and position of the bottom bar.  Usually
      * you only need to call this if the `paper-tabs` is initially hidden and
@@ -3574,34 +3574,34 @@ polyfill-next-selector { content: '#tabsContent > *:not(#selectionBar)'; }
     updateBar: function() {
       this.async('selectedItemChanged');
     },
-    
+
     selectedItemChanged: function(old) {
       var oldIndex = this.selectedIndex;
       this.super(arguments);
       var s = this.$.selectionBar.style;
-      
+
       if (!this.selectedItem) {
         s.width = 0;
         s.left = 0;
         return;
-      } 
-      
+      }
+
       var r = this.$.tabsContent.getBoundingClientRect();
       this._w = r.width;
       this._l = r.left;
-      
+
       r = this.selectedItem.getBoundingClientRect();
       this._sw = r.width;
       this._sl = r.left;
-      this._sOffsetLeft = this._sl - this._l; 
-      
+      this._sOffsetLeft = this._sl - this._l;
+
       if (this.noslide || old == null) {
         this.positionBarForSelected();
         return;
       }
-      
+
       var oldRect = old.getBoundingClientRect();
-      
+
       var m = 5;
       this.$.selectionBar.classList.add('expand');
       if (oldIndex < this.selectedIndex) {
@@ -3616,26 +3616,26 @@ polyfill-next-selector { content: '#tabsContent > *:not(#selectionBar)'; }
         this.scrollToSelectedIfNeeded();
       }
     },
-    
+
     scrollToSelectedIfNeeded: function() {
       var scrollLeft = this.$.tabsContainer.scrollLeft;
       // scroll to selected if needed
-      if (this._sOffsetLeft + this._sw < scrollLeft || 
+      if (this._sOffsetLeft + this._sw < scrollLeft ||
           this._sOffsetLeft - scrollLeft > this.$.tabsContainer.offsetWidth) {
         this.$.tabsContainer.scrollLeft = this._sOffsetLeft;
       }
     },
-    
+
     positionBarForSelected: function() {
       var s = this.$.selectionBar.style;
       s.width = this.calcPercent(this._sw) + '%';
       s.left = this.calcPercent(this._sOffsetLeft) + '%';
     },
-    
+
     calcPercent: function(w) {
       return 100 * w / this._w;
     },
-    
+
     barTransitionEnd: function(e) {
       this._transitionCounter--;
       var cl = this.$.selectionBar.classList;
@@ -3647,9 +3647,9 @@ polyfill-next-selector { content: '#tabsContent > *:not(#selectionBar)'; }
         cl.remove('contract');
       }
     }
-    
+
   }, Polymer.CoreResizable));
-  
+
 </script>
 </polymer-element>
 
@@ -3975,7 +3975,7 @@ core-icon {
       }
 
     };
-    
+
     Polymer.mixin2(p, Polymer.CoreFocusable);
     Polymer('core-icon-button', p);
 
@@ -4023,11 +4023,11 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
   var IOS_TOUCH_SCROLLING = IOS && IOS[1] >= 8;
 
   Polymer('core-list',Polymer.mixin({
-    
+
     publish: {
       /**
        * Fired when an item element is tapped.
-       * 
+       *
        * @event core-activate
        * @param {Object} detail
        *   @param {Object} detail.item the item element
@@ -4076,7 +4076,7 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
       groups: null,
 
       /**
-       * 
+       *
        * An optional element on which to listen for scroll events.
        *
        * @attribute scrollTarget
@@ -4086,7 +4086,7 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
       scrollTarget: null,
 
       /**
-       * 
+       *
        * When true, tapping a row will select the item, placing its data model
        * in the set of selected items retrievable via the `selection` property.
        *
@@ -4100,7 +4100,7 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
       selectionEnabled: true,
 
       /**
-       * 
+       *
        * Set to true to support multiple selection.  Note, existing selection
        * state is maintained only when changing `multi` from `false` to `true`;
        * it is cleared when changing from `true` to `false`.
@@ -4112,7 +4112,7 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
       multi: false,
 
       /**
-       * 
+       *
        * Data record (or array of records, if `multi: true`) corresponding to
        * the currently selected set of items.
        *
@@ -4123,7 +4123,7 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
        selection: null,
 
       /**
-       * 
+       *
        * When true, the list is rendered as a grid.  Grid items must be fixed
        * height and width, with the width of each item specified in the `width`
        * property.
@@ -4135,7 +4135,7 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
        grid: false,
 
       /**
-       * 
+       *
        * When `grid` is used, `width` determines the width of each grid item.
        * This property has no meaning when not in `grid` mode.
        *
@@ -4149,7 +4149,7 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
        * The approximate height of a list item, in pixels. This is used only for determining
        * the number of physical elements to render based on the viewport size
        * of the list.  Items themselves may vary in height between each other
-       * depending on their data model.  There is typically no need to adjust 
+       * depending on their data model.  There is typically no need to adjust
        * this value unless the average size is much larger or smaller than the default.
        *
        * @attribute height
@@ -4179,7 +4179,7 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
 
     // Local cache of scrollTop
     _scrollTop: 0,
-    
+
     observe: {
       'isAttached data grid width template scrollTarget': 'initialize',
       'multi selectionEnabled': '_resetSelection'
@@ -4239,8 +4239,8 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
     },
 
     _resetSelection: function() {
-      if (((this._oldMulti != this.multi) && !this.multi) || 
-          ((this._oldSelectionEnabled != this.selectionEnabled) && 
+      if (((this._oldMulti != this.multi) && !this.multi) ||
+          ((this._oldSelectionEnabled != this.selectionEnabled) &&
             !this.selectionEnabled)) {
         this._clearSelection();
         this.refresh();
@@ -4317,7 +4317,7 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
         return;
       }
 
-      // TODO(kschaaf): Checking arguments.length currently the only way to 
+      // TODO(kschaaf): Checking arguments.length currently the only way to
       // know that the array was mutated as opposed to newly assigned; need
       // a better API for Polymer observers
       var splices;
@@ -4498,7 +4498,7 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
       if (!groupUpdate) {
         this.updateGroupObservers(splices);
       }
-      
+
       // Add physical items up to a max based on data length, viewport size, and extra item overhang
       var currentCount = this._physicalCount || 0;
       var height = this._target.offsetHeight;
@@ -4558,7 +4558,7 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
         physicalDatum.model = virtualDatum;
         physicalDatum.index = virtualIndex;
         physicalDatum.physicalIndex = physicalIndex;
-        physicalDatum.selected = this.selectionEnabled && virtualDatum ? 
+        physicalDatum.selected = this.selectionEnabled && virtualDatum ?
             this._selectedData.get(virtualDatum) : null;
         // Set group-related fields
         if (this._grouped) {
@@ -4593,7 +4593,7 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
         // iOS sends multiple scroll events per rAF
         // Align work to rAF to reduce overhead & artifacts
         if (!this._raf) {
-          this._raf = requestAnimationFrame(function() { 
+          this._raf = requestAnimationFrame(function() {
             this._raf = null;
             this.refresh();
           }.bind(this));
@@ -4791,10 +4791,10 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
              (this._dir < 0 && this._scrollTop < flipBound))) {
           var flipSize = Math.abs(this._scrollTop - flipBound);
           for (i=0; (i<this._physicalCount) && (flipSize > 0) &&
-              ((this._dir < 0 && this._virtualStart > 0) || 
+              ((this._dir < 0 && this._virtualStart > 0) ||
                (this._dir > 0 && this._virtualStart < this._virtualCount-this._physicalCount)); i++) {
-            var idx = this._virtualToPhysical(this._dir > 0 ? 
-              this._virtualStart : 
+            var idx = this._virtualToPhysical(this._dir > 0 ?
+              this._virtualStart :
               this._virtualStart + this._physicalCount -1);
             var size = this._physicalSizes[idx];
             flipSize -= size;
@@ -4834,7 +4834,7 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
         virtualIndex = this._virtualStart + i;
         physicalIndex = this._virtualToPhysical(virtualIndex);
         // Update physical item with new user data and list metadata
-        needsReposition = 
+        needsReposition =
           this._updateItemData(force, physicalIndex, virtualIndex, groupIndex, groupItemIndex) || needsReposition;
         // Increment
         groupItemIndex++;
@@ -4963,7 +4963,7 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
         // Gambit: only select the item if the tap wasn't on a focusable child
         // of the list (since anything with its own action should be focusable
         // and not result in result in list selection).  To check this, we
-        // asynchronously check that shadowRoot.activeElement is null, which 
+        // asynchronously check that shadowRoot.activeElement is null, which
         // means the tapped item wasn't focusable. On polyfill where
         // activeElement doesn't follow the data-hinding part of the spec, we
         // can check that document.activeElement is the list itself, which will
@@ -4971,17 +4971,17 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
         // the list focusable (tabindex="-1") for this purpose.  Note we also
         // allow the list items themselves to be focusable if desired, so those
         // are excluded as well.
-        var active = window.ShadowDOMPolyfill ? 
+        var active = window.ShadowDOMPolyfill ?
             wrap(document.activeElement) : this.shadowRoot.activeElement;
-        if (active && (active != this) && (active.parentElement != this) && 
+        if (active && (active != this) && (active.parentElement != this) &&
             (document.activeElement != document.body)) {
           return;
         }
         // Unfortunately, Safari does not focus certain form controls via mouse,
         // so we also blacklist input, button, & select
         // (https://bugs.webkit.org/show_bug.cgi?id=118043)
-        if ((p[0].localName == 'input') || 
-            (p[0].localName == 'button') || 
+        if ((p[0].localName == 'input') ||
+            (p[0].localName == 'button') ||
             (p[0].localName == 'select')) {
           return;
         }
@@ -5015,7 +5015,7 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
      * Select the list item at the given index.
      *
      * @method selectItem
-     * @param {number} index 
+     * @param {number} index
      */
     selectItem: function(index) {
       if (!this.selectionEnabled) {
@@ -5031,8 +5031,8 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
      * Set the selected state of the list item at the given index.
      *
      * @method setItemSelected
-     * @param {number} index 
-     * @param {boolean} isSelected 
+     * @param {number} index
+     * @param {boolean} isSelected
      */
     setItemSelected: function(index, isSelected) {
       var data = this.data[index];
@@ -5114,7 +5114,7 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
      * within a group, use the `scrollToGroupItem` API.
      *
      * @method scrollToItem
-     * @param {number} index 
+     * @param {number} index
      */
     scrollToItem: function(index) {
       this.scrollToGroupItem(null, index);
@@ -5124,7 +5124,7 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
      * Scroll to a group.
      *
      * @method scrollToGroup
-     * @param {number} group 
+     * @param {number} group
      */
     scrollToGroup: function(group) {
       this.scrollToGroupItem(group, 0);
@@ -5134,8 +5134,8 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
      * Scroll to an item within a group.
      *
      * @method scrollToGroupItem
-     * @param {number} group 
-     * @param {number} index 
+     * @param {number} group
+     * @param {number} index
      */
     scrollToGroupItem: function(group, index) {
       if (group != null) {
@@ -5535,7 +5535,7 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
 <script>
 
   Polymer('core-range', {
-    
+
     /**
      * The number that represents the current value.
      *
@@ -5544,7 +5544,7 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
      * @default 0
      */
     value: 0,
-    
+
     /**
      * The number that indicates the minimum value of the range.
      *
@@ -5553,7 +5553,7 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
      * @default 0
      */
     min: 0,
-    
+
     /**
      * The number that indicates the maximum value of the range.
      *
@@ -5562,7 +5562,7 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
      * @default 100
      */
     max: 100,
-    
+
     /**
      * Specifies the value granularity of the range's value.
      *
@@ -5571,7 +5571,7 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
      * @default 1
      */
     step: 1,
-    
+
     /**
      * Returns the ratio of the value.
      *
@@ -5580,42 +5580,42 @@ polyfill-next-selector { content: ':host(:not([grid])) .core-list-viewport > *';
      * @default 0
      */
     ratio: 0,
-    
+
     observe: {
       'value min max step': 'update'
     },
-    
+
     calcRatio: function(value) {
       return (this.clampValue(value) - this.min) / (this.max - this.min);
     },
-    
+
     clampValue: function(value) {
       return Math.min(this.max, Math.max(this.min, this.calcStep(value)));
     },
-    
+
     calcStep: function(value) {
       return this.step ? (Math.round(value / this.step) / (1 / this.step)) : value;
     },
-    
+
     validateValue: function() {
       var v = this.clampValue(this.value);
       this.value = this.oldValue = isNaN(v) ? this.oldValue : v;
       return this.value !== v;
     },
-    
+
     update: function() {
       this.validateValue();
       this.ratio = this.calcRatio(this.value) * 100;
     }
-    
+
   });
-  
+
 </script>
 </polymer-element>
 <polymer-element name="paper-progress" extends="core-range" attributes="secondaryProgress indeterminate" assetpath="../components/paper-progress/">
 
   <template>
-  
+
     <style>/*
 Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
@@ -5685,20 +5685,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 }
 </style>
-  
+
     <div id="progressContainer" role="progressbar" aria-valuenow="{{value}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}">
-    
+
       <div id="secondaryProgress" fit=""></div>
       <div id="activeProgress" fit=""></div>
-      
+
     </div>
-    
+
   </template>
-  
+
   <script>
-  
+
     Polymer('paper-progress', {
-      
+
       /**
        * The number that represents the current secondary progress.
        *
@@ -5707,7 +5707,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * @default 0
        */
       secondaryProgress: 0,
-      
+
       /**
        * Use an indeterminate progress indicator.
        *
@@ -5718,11 +5718,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       indeterminate: false,
 
       step: 0,
-      
+
       observe: {
         'value secondaryProgress min max indeterminate': 'update'
       },
-      
+
       update: function() {
         this.super();
         this.secondaryProgress = this.clampValue(this.secondaryProgress);
@@ -5745,11 +5745,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       secondaryRatioChanged: function() {
         this.transformProgress(this.$.secondaryProgress, this.secondaryRatio);
       }
-      
+
     });
-    
+
   </script>
-  
+
 </polymer-element>
 
 <polymer-element name="core-input" extends="input" assetpath="../components/core-input/">
@@ -5871,7 +5871,7 @@ Polymer('core-style', {
 
   publish: {
     /**
-     * The `ref` property should be set if the `core-style` element is a 
+     * The `ref` property should be set if the `core-style` element is a
      * consumer of styles. Set it to the `id` of the desired `core-style`
      * element.
      *
@@ -5887,7 +5887,7 @@ Polymer('core-style', {
   refMap: CoreStyle.refMap,
 
   /**
-   * The `list` is a map of all `core-style` producers stored by `id`. It 
+   * The `list` is a map of all `core-style` producers stored by `id`. It
    * should be considered readonly. It's useful for nesting one `core-style`
    * inside another.
    *
@@ -5906,7 +5906,7 @@ Polymer('core-style', {
       this.registerRef(this.ref);
       if (!window.ShadowDOMPolyfill) {
         this.require();
-      }  
+      }
     }
   },
 
@@ -5938,7 +5938,7 @@ Polymer('core-style', {
       }
       this.list[this.id].push(this);
     } else {
-      this.list[this.id] = this;  
+      this.list[this.id] = this;
     }
   },
 
@@ -5946,7 +5946,7 @@ Polymer('core-style', {
   _completeProvide: function() {
     this.createShadowRoot();
     this.domObserver = new MutationObserver(this.domModified.bind(this))
-        .observe(this.shadowRoot, {subtree: true, 
+        .observe(this.shadowRoot, {subtree: true,
         characterData: true, childList: true});
     this.provideContent();
   },
@@ -6047,7 +6047,7 @@ Polymer('core-style', {
 
   ensureStyleElement: function() {
     if (!this.styleElement) {
-      this.styleElement = window.ShadowDOMPolyfill ? 
+      this.styleElement = window.ShadowDOMPolyfill ?
           this.makeShimStyle() :
           this.makeRootStyle();
     }
@@ -6082,7 +6082,7 @@ Polymer('core-style', {
       if (host) {
         var typeExtension = host.hasAttribute('is');
         var name = typeExtension ? host.getAttribute('is') : host.localName;
-        selector = WebComponents.ShadowCSS.makeScopeSelector(name, 
+        selector = WebComponents.ShadowCSS.makeScopeSelector(name,
             typeExtension);
       }
       this._scopeSelector = selector;
@@ -6114,7 +6114,7 @@ Polymer('core-style', {
     }
 
     return rgb.replace(/rgb\(([^,]*),([^,]*),([^,]*)\)/, function(m, a, b, c) {
-      return 'rgb(' + cycleChannel(a) + ',' + cycleChannel(b) + ', ' 
+      return 'rgb(' + cycleChannel(a) + ',' + cycleChannel(b) + ', '
           + cycleChannel(c) + ')';
     });
   },

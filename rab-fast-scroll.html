@@ -3,7 +3,7 @@
 <link rel="import" href="../paper-input/paper-input.html">
 
 <polymer-element name="rab-fast-scroll" extends="core-range"
-                 attributes="rotate snaps pin disabled secondaryProgress editable immediateValue dragging sectionValue target"
+                 attributes="rotate snaps pin disabled secondaryProgress editable immediateValue dragging sectionValue target speed"
                  role="scroll" tabindex="0" aria-valuemin="0" aria-valuemax="100">
 <template>
 
@@ -16,7 +16,7 @@
     </template>
 
     <div id="scrollContainer"
-         class="{{ {disabled: disabled, pin: pin, snaps: snaps, ring: immediateValue <= min, expand: expand, dragging: dragging, transiting: transiting, editable: editable , rotate:rotate, target:target} | tokenList }}">
+         class="{{ {disabled: disabled, pin: pin, snaps: snaps, ring: immediateValue <= min, expand: expand, dragging: dragging, transiting: transiting, editable: editable , rotate:rotate, target:target, speed:speed} | tokenList }}">
 
         <div class="bar-container">
             <paper-progress id="scrollBar" aria-hidden="true" min="{{min}}" max="{{max}}" value="{{immediateValue}}"
@@ -71,6 +71,8 @@
 
         rotate: true,
 
+        speed: 2,
+
         scrollWindowHeight: 0,
 
         observe: {
@@ -103,6 +105,18 @@
 
         },
 
+        speedChanged: function(oldSpeed, newSpeed) {
+
+            // set reference to scroll window
+            this.scrollSpeed = newSpeed;
+
+            // change height scrollbar based on speed
+            // this.updateScollBarSize();
+            // TODO: Without setTimeout - get ready from loading data into core-list
+            setTimeout(this.updateScollBarSize.bind(this), 1000);
+
+        },
+
         checkScrollWindowHeight: function() {
 
             // compare height with _viewportSize of core-list
@@ -116,7 +130,7 @@
         updateScollBarSize: function () {
 
             // set rab-fast-scrolls maxScroll
-            this.max = this.scrollWindow.scrollHeight - this.scrollWindow.offsetHeight;
+            this.max = (this.scrollWindow.scrollHeight - this.scrollWindow.offsetHeight) / this.speed;
 
             // set dividers from core-list
             this.dividers = this.scrollWindow._physicalDividers;
@@ -129,7 +143,9 @@
         setScroll: function () {
 
             // update rab-fast-scroll position
-            if (!this.dragging) this.value = this.scrollWindow.scrollTop;
+            if (!this.dragging) {
+                this.value = this.scrollWindow.scrollTop / this.speed;
+            }
 
         },
 
@@ -141,7 +157,9 @@
                     scrollWindow = this.targetReference(this.target),
                     scrollBar = this,
                     scrollBarPosition = scrollBar._x ? scrollBar._x : scrollBar.shadowRoot.querySelector('#scrollKnob').offsetLeft,
-                    scrollDirection = scrollBarPosition < this.lastScrollTop ? "up" : "down";
+                    scrollDirection = scrollBarPosition < this.lastScrollTop ? "up" : "down",
+                    scrollSpeed = this.scrollSpeed,
+                    fastScroll = scrollBar.immediateValue * scrollSpeed;
 
             this.lastScrollTop = scrollBarPosition;
 
@@ -170,7 +188,7 @@
             }
 
             // set window after scrolling with rab-fast-scroll
-            if (this.dragging) scrollWindow.setScrollTop(scrollBar.immediateValue);
+            if (this.dragging) scrollWindow.setScrollTop(fastScroll);
 
         },
 
