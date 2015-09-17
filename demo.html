@@ -1,16 +1,222 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>fast-scroll demo</title>
-</head>
-<body>
 
-<h3>Demo of rab-fast-scroll is in another GIT repo</h3>
-<ul>
-    <li><a href="https://gitlab.com/studio.rabota/polymer-contact-app">GIT repo</a></li>
-    <li><a href="http:://www.studiorabota.com/polymer-contact-app.html">View demo</a></li>
-</ul>
+<head>
+
+    <title>Fast Scroll</title>
+
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+    <script src="../webcomponentsjs/webcomponents.js"></script>
+
+    <!-- Polymer Components -->
+    <link rel="import"
+          href="../core-style/core-style.html">
+    <link rel="import"
+          href="../font-roboto/roboto.html">
+
+    <!-- Polymer Components for testing -->
+    <link rel="import"
+          href="../core-list/core-list.html">
+
+    <!-- Custom Components -->
+    <link rel="import"
+          href="rab-fast-scroll.html">
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            background-color: #E5E5E5;
+            font-family: 'RobotoDraft', sans-serif;
+        }
+    </style>
+
+</head>
+
+<body unresolved>
+
+<polymer-element name="contact-list">
+
+    <template>
+
+        <style>
+            /*
+            * ScrollBar
+            */
+
+            /* Color knob init state */
+            rab-fast-scroll::shadow .ring > #scrollKnob > #scrollKnobInner {
+                /*background-color: #F44336;*/
+            }
+
+            /* Color knob after click */
+            rab-fast-scroll::shadow .ring.expand > #scrollKnob > #scrollKnobInner {
+                /*background-color: #E91E63;*/
+            }
+
+            /* Color balloon after click */
+            rab-fast-scroll::shadow .pin.ring > #scrollKnob > #scrollKnobInner::before {
+                /*background-color: #9C27B0;*/
+            }
+
+            /* Color knob when balloon expanded */
+            rab-fast-scroll::shadow .pin.expand #scrollKnobInner {
+                /*background-color: #4CAF50;*/
+            }
+
+            /* Dragging: Color knob */
+            rab-fast-scroll::shadow #scrollKnobInner {
+                /*background-color: #FF9800;*/
+            }
+
+            /* Dragging: Color balloon */
+            rab-fast-scroll::shadow .pin > #scrollKnob > #scrollKnobInner::before {
+                /*background-color: #00BCD4;*/
+            }
+
+            /* Color text */
+            rab-fast-scroll::shadow #scrollKnob > #scrollKnobInner::after {
+                color: white;
+            }
+
+            /*
+            * Core List
+            */
+            core-list {
+                width: calc(100% + 32px); /* hide browser scrollbar */
+                padding-bottom: 30px;
+                background: white;
+            }
+
+            /*
+            * List
+            */
+            .divider, .item  {
+                text-align: center;
+                font-size: 30px;
+                color:#fff;
+                background: #651FFF;
+            }
+            .divider {
+                text-align: left;
+                padding-left: 10px;
+                font-size: 20px;
+                width: 40px !important;
+                color: gray;
+                left: 0px;
+                opacity: 1;
+                background-color: transparent;
+                margin-left: 9px;
+                z-index: 999;
+                height: 1px;
+            }
+            .divider .letter {
+                transform: translateY(16px);
+            }
+            .item {
+                color: #000;
+                background: #fff;
+                font-size:14px;
+                padding-left: 60px;
+                padding-right: 50px;
+            }
+
+            .avatar {
+                background-color: #43A047;
+                width: 43px;
+                height: 43px;
+                border-radius: 50%;
+                line-height: 1.35;
+                color: #fff;
+                font-weight: 100;
+                font-size: 33px;
+                margin-bottom: 5px;
+                margin-top:5px;
+                display: inline-block;
+                float:left;
+            }
+            .avatar.blue {
+                background-color: #2196F3;
+            }
+            .avatar.pink {
+                background-color: #E91E63;
+            }
+            .avatar.purple {
+                background-color: #673AB7;
+            }
+            .avatar.red {
+                background-color: #F50057;
+            }
+            .avatar.img {
+                background-color: #E91E63;
+            }
+            .avatar.img span {
+                display: none;
+            }
+
+            .name {
+                text-align: left;
+                padding-left: 20px;
+                text-transform: initial !important;
+                margin-top:20px;
+                display: inline-block;
+                float:left;
+            }
+        </style>
+
+        <core-list data="{{data}}" groups="{{groups}}" id="scrollWindow" runwayFactor="2000" fit>
+            <template>
+                <div divider class="divider"><div class="letter">{{groupModel.letter}}</div></div>
+
+                <div class="item" horizontal layout>
+                    <div flex>
+                        <div class="avatar {{model.color}}"><span>{{groupModel.letter}}</span></div>
+                        <div class="name" flex>{{model.name}}</div>
+                    </div>
+                </div>
+            </template>
+        </core-list>
+
+        <rab-fast-scroll pin="true" target="{{scrollTarget}}" speed="{{scrollSpeed}}"></rab-fast-scroll>
+
+    </template>
+
+    <script>
+        Polymer('contact-list', {
+
+            ready: function() {
+                this.scrollTarget = '#scrollWindow';
+                this.scrollSpeed = 50;
+            },
+            data: [
+
+                [ { name: 'Aaren Lundberg', color:'blue' }, { name: 'Aarika Barbagallo', color:'blue' }, { name: 'Abagael Fogarty' }, { name: 'Abbey Jelks', color:'pink' }, { name: 'Abra Bohannan' }, { name: 'Ada Tomson' }, { name: 'Adele Sober', color:'purple' }, { name: 'Adore Reeves' }, { name: 'Aaren Lundberg', color:'blue' }, { name: 'Aarika Barbagallo', color:'blue' }, { name: 'Abagael Fogarty' }, { name: 'Abbey Jelks', color:'pink' }, { name: 'Abra Bohannan' }, { name: 'Ada Tomson' }, { name: 'Adele Sober', color:'purple' }, { name: 'Adore Reeves' }, { name: 'Aaren Lundberg', color:'blue' }, { name: 'Aarika Barbagallo', color:'blue' }, { name: 'Abagael Fogarty' }, { name: 'Abbey Jelks', color:'pink' }, { name: 'Abra Bohannan' }, { name: 'Ada Tomson' }, { name: 'Adele Sober', color:'purple' }, { name: 'Adore Reeves' } ],
+                [ { name: 'Brigitte Timmerman' }, { name: 'Barb Sands', color:'purple' }, { name: 'Blossom Pera', color:'red' }, { name: 'Brianna Buster' }, { name: 'Brigitte Timmerman' }, { name: 'Barb Sands', color:'purple' }, { name: 'Blossom Pera', color:'red' }, { name: 'Brianna Buster' } ],
+                [ { name: 'Caren Unsworth', color:'pink' }, { name: 'Chia Trowell' }, { name: 'Clarita Steinhauer', color:'purple' }, { name: 'Cameron Colvin' }, { name: 'Caren Unsworth', color:'pink' }, { name: 'Chia Trowell' }, { name: 'Clarita Steinhauer', color:'purple' }, { name: 'Cameron Colvin' } ],
+                [ { name: 'Aaren Lundberg', color:'blue' }, { name: 'Aarika Barbagallo', color:'blue' }, { name: 'Abagael Fogarty' }, { name: 'Abbey Jelks', color:'pink' }, { name: 'Abra Bohannan' }, { name: 'Ada Tomson' }, { name: 'Adele Sober', color:'purple' }, { name: 'Adore Reeves' }, { name: 'Aaren Lundberg', color:'blue' }, { name: 'Aarika Barbagallo', color:'blue' }, { name: 'Abagael Fogarty' }, { name: 'Abbey Jelks', color:'pink' }, { name: 'Abra Bohannan' }, { name: 'Ada Tomson' }, { name: 'Adele Sober', color:'purple' }, { name: 'Adore Reeves' }, { name: 'Aaren Lundberg', color:'blue' }, { name: 'Aarika Barbagallo', color:'blue' }, { name: 'Abagael Fogarty' }, { name: 'Abbey Jelks', color:'pink' }, { name: 'Abra Bohannan' }, { name: 'Ada Tomson' }, { name: 'Adele Sober', color:'purple' }, { name: 'Adore Reeves' } ],
+                [ { name: 'Brigitte Timmerman' }, { name: 'Barb Sands', color:'purple' }, { name: 'Blossom Pera', color:'red' }, { name: 'Brianna Buster' }, { name: 'Brigitte Timmerman' }, { name: 'Barb Sands', color:'purple' }, { name: 'Blossom Pera', color:'red' }, { name: 'Brianna Buster' } ],
+                [ { name: 'Caren Unsworth', color:'pink' }, { name: 'Chia Trowell' }, { name: 'Clarita Steinhauer', color:'purple' }, { name: 'Cameron Colvin' }, { name: 'Caren Unsworth', color:'pink' }, { name: 'Chia Trowell' }, { name: 'Clarita Steinhauer', color:'purple' }, { name: 'Cameron Colvin' } ]
+
+            ],
+            groups: [
+
+                { letter: 'A' },
+                { letter: 'B' },
+                { letter: 'C' },
+                { letter: 'D' },
+                { letter: 'E' },
+                { letter: 'F' }
+
+            ]
+
+        });
+    </script>
+
+</polymer-element>
+
+<contact-list></contact-list>
 
 </body>
+
 </html>
