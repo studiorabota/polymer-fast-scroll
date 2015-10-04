@@ -203,6 +203,29 @@
     transform: rotate(180deg) scale(1) translate(17px, -17px);
 }
 
+.pin.expand > #scrollKnob.fix-balloon > #scrollKnobInner::before {
+    position: fixed;
+
+    /* to rotate */
+    left:0;
+    transform: rotate(90deg) scale(1) translate(18px, 0px);
+
+    /* not rotate */
+    left: 10px;
+    transform: rotate(180deg) scale(1) translate(17px, -17px);
+}
+.pin.expand > #scrollKnob.fix-balloon > #scrollKnobInner::after {
+    position: fixed;
+
+    /* to rotate */
+    left: 0;
+    transform: rotate(-90deg) scale(1) translate(-48px, 20px);
+
+    /* not rotate */
+    left: 15px;
+    transform: rotate(-90deg) scale(1) translate(-48px, 0);
+}
+
 .pin > #scrollKnob > #scrollKnobInner::after {
     content: attr(value);
     position: absolute;
